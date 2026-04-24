@@ -181,8 +181,16 @@
             width: 12px; height: 12px; background: var(--bg); border: 2px solid var(--accent-1); border-radius: 50%;
         }
 
-        /* Ripple Visuals for Contact */
-        .ripple-container { position: relative; width: 150px; height: 150px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+        /* Ripple Visuals for Contact - Increased size to 250px */
+        .ripple-container { 
+            position: relative; 
+            width: 250px; 
+            height: 250px; 
+            margin: 0 auto; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
         .ripple { position: absolute; border: 2px solid var(--accent-1); border-radius: 50%; width: 100%; height: 100%; animation: rip 3s infinite; }
         @keyframes rip { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
 
@@ -458,7 +466,8 @@
                     <div class="ripple"></div>
                     <div class="ripple" style="animation-delay: 1s;"></div>
                     <div class="ripple" style="animation-delay: 2s;"></div>
-                    <img src="personal_picture.jpg" alt="Hani Alsakani" style="z-index: 2; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-1);">
+                    <!-- Fixed object-fit to contain to prevent face zoom/clipping -->
+                    <img src="personal_picture.PNG" alt="Hani Alsakani" style="z-index: 2; width: 100%; height: 100%; border-radius: 50%; object-fit: contain; border: 3px solid var(--accent-1);">
                 </div>
             </div>
         </div>
