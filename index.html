@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hani Alsakani | Professional Portfolio </title>
+    <title>Hani Alsakani | Portfolio Professional </title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@600;700;800&family=Playfair+Display:wght@700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
@@ -11,7 +11,6 @@
            1. THEME ENGINE - VARIABLES
         ========================================= */
         :root {
-            /* Default: Cyber-Glow Analytics */
             --bg: #0a0a0c;
             --surface: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.1);
@@ -90,7 +89,6 @@
         }
         h1, h2, h3, h4 { font-family: var(--font-h); text-transform: uppercase; }
 
-        /* Grid Background Overlay */
         body::before {
             content: ""; position: fixed; inset: 0;
             background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
@@ -99,7 +97,7 @@
 
         #particle-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
 
-        /* Navigation */
+        /* Navigation Responsive Fix */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 1000;
             padding: 1.2rem 10%; display: flex; justify-content: space-between; align-items: center;
@@ -113,7 +111,12 @@
         }
         .nav-links a:hover { color: var(--accent-1); }
 
-        /* Theme Switcher */
+        .menu-toggle {
+            display: none;
+            background: none; border: none; color: var(--text-p);
+            font-size: 1.5rem; cursor: pointer;
+        }
+
         .theme-selector { position: relative; }
         .theme-btn {
             background: var(--accent-1); color: white; border: none;
@@ -131,12 +134,10 @@
         }
         .theme-menu button:hover { background: var(--accent-1); color: white; }
 
-        /* Sections */
         section { padding: 120px 10% 60px; min-height: 80vh; }
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* Hero */
         .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
         .hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.9; margin-bottom: 20px; }
         .hero p { font-size: 1.1rem; color: var(--text-s); margin-bottom: 40px; max-width: 550px; }
@@ -153,7 +154,6 @@
         .btn-p:hover { background: transparent; color: var(--accent-1); }
         .btn-s:hover { border-color: var(--accent-1); color: var(--accent-1); }
 
-        /* Stats Card */
         .stats-box {
             background: var(--surface); border: 1px solid var(--border);
             padding: 40px; border-radius: var(--radius); text-align: center;
@@ -161,7 +161,6 @@
         .stat-val { font-size: 3.5rem; font-weight: 900; color: var(--accent-1); display: block; }
         .stat-lbl { font-size: 0.7rem; letter-spacing: 2px; color: var(--text-s); }
 
-        /* Grid */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .card {
             background: var(--surface); border: 1px solid var(--border);
@@ -169,11 +168,9 @@
         }
         .card:hover { border-color: var(--accent-1); transform: translateY(-5px); }
         
-        /* Skill Bars */
         .track { height: 8px; background: rgba(128,128,128,0.1); border-radius: 10px; margin-top: 15px; overflow: hidden; }
         .fill { height: 100%; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); width: 0; transition: 2s; }
 
-        /* Timeline */
         .timeline { border-left: 2px solid var(--border); padding-left: 30px; position: relative; }
         .time-item { margin-bottom: 50px; position: relative; }
         .time-item::before {
@@ -181,7 +178,6 @@
             width: 12px; height: 12px; background: var(--bg); border: 2px solid var(--accent-1); border-radius: 50%;
         }
 
-        /* Ripple Visuals for Contact - Increased size to 250px */
         .ripple-container { 
             position: relative; 
             width: 250px; 
@@ -194,11 +190,9 @@
         .ripple { position: absolute; border: 2px solid var(--accent-1); border-radius: 50%; width: 100%; height: 100%; animation: rip 3s infinite; }
         @keyframes rip { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
 
-        /* Cursor */
         .dot { width: 8px; height: 8px; background: var(--cursor); position: fixed; border-radius: 50%; pointer-events: none; z-index: 10001; }
         .ring { width: 35px; height: 35px; border: 1px solid var(--cursor); position: fixed; border-radius: 50%; pointer-events: none; z-index: 10001; transition: 0.1s ease-out; }
 
-        /* AI Assistant Window */
         .ai-chat-btn {
             position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
             background: var(--accent-1); border-radius: 50%; border: none; color: white;
@@ -211,7 +205,6 @@
         }
         .ai-win.open { display: flex; }
 
-        /* AI Feature Components */
         .summary-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 5000;
             display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px);
@@ -234,7 +227,6 @@
             margin-bottom: 20px; outline: none; resize: vertical;
         }
 
-        /* Marquee Animation Bar */
         .marquee { 
             width: 100%; 
             overflow: hidden; 
@@ -264,10 +256,25 @@
             100% { transform: translateX(-50%); } 
         }
 
+        /* Mobile Adjustments */
         @media (max-width: 968px) {
             .hero { grid-template-columns: 1fr; text-align: center; }
-            .nav-links { display: none; }
             .cta-group { justify-content: center; }
+            .menu-toggle { display: block; z-index: 1100; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg);
+                padding: 20px;
+                border-bottom: 1px solid var(--border);
+                gap: 20px;
+            }
+            .nav-links.active { display: flex; }
+            nav { padding: 1.2rem 5%; }
         }
     </style>
 </head>
@@ -279,12 +286,13 @@
 
     <nav>
         <div class="syne" style="font-weight: 800; color: var(--accent-1);">HANI.ALSAKANI</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#matcher">✨ Matcher</a></li>
-            <li><a href="#contact">Contact</a></li>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#about" onclick="toggleMenu()">About</a></li>
+            <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
+            <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+            <li><a href="#matcher" onclick="toggleMenu()">✨ Matcher</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
             <li class="theme-selector">
                 <button class="theme-btn">🎨 THEMES</button>
                 <div class="theme-menu">
@@ -297,7 +305,6 @@
         </ul>
     </nav>
 
-    <!-- Hero Section -->
     <section id="about" class="hero">
         <div class="reveal">
             <div style="font-weight: 800; color: var(--accent-1); letter-spacing: 2px; margin-bottom: 10px; font-size: 0.7rem;">GREATER LONDON, UK</div>
@@ -319,7 +326,6 @@
         </div>
     </section>
 
-    <!-- AI Summary Overlay -->
     <div id="summary-overlay" class="summary-overlay" onclick="this.classList.remove('active')">
         <div class="summary-card" onclick="event.stopPropagation()">
             <div id="summary-loader" class="summary-loader"></div>
@@ -331,7 +337,6 @@
         </div>
     </div>
 
-    <!-- Skills Section -->
     <section id="skills">
         <h2 class="reveal" style="margin-bottom: 40px;">Technical Expertise</h2>
         <div class="grid">
@@ -351,90 +356,52 @@
                 <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-s);">Foundational Python, SQL, and Full-stack knowledge.</p>
             </div>
         </div>
-        <div class="reveal" style="margin-top: 40px; display: flex; flex-wrap: wrap; gap: 10px;">
-            <span style="background: var(--surface); padding: 8px 15px; border-radius: 100px; font-size: 0.75rem; border: 1px solid var(--border);">SAP</span>
-            <span style="background: var(--surface); padding: 8px 15px; border-radius: 100px; font-size: 0.75rem; border: 1px solid var(--border);">Jira</span>
-            <span style="background: var(--surface); padding: 8px 15px; border-radius: 100px; font-size: 0.75rem; border: 1px solid var(--border);">GDPR Compliance</span>
-            <span style="background: var(--surface); padding: 8px 15px; border-radius: 100px; font-size: 0.75rem; border: 1px solid var(--border);">Agile Methodology</span>
-            <span style="background: var(--surface); padding: 8px 15px; border-radius: 100px; font-size: 0.75rem; border: 1px solid var(--border);">GitHub</span>
-        </div>
     </section>
 
-    <!-- Experience Section -->
     <section id="experience">
         <h2 class="reveal" style="margin-bottom: 40px;">Professional History</h2>
         <div class="timeline">
             <div class="time-item reveal">
                 <span style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem;">May 2022 – Nov 2024</span>
                 <h3 style="margin: 5px 0;">Technical & Administrative Assistant</h3>
-                <h4 style="color: var(--text-s); font-size: 0.85rem; margin-bottom: 10px;">ISDB | Kingdom of Saudi Arabia Project for Utilization of Hady & Adahi</h4>
-                <p style="font-size: 0.9rem;">Managed project documentation using SAP and Jira; reduced approval times by 20% through workflow optimization and coordinated logistics for beneficiary country collaborations.</p>
+                <h4 style="color: var(--text-s); font-size: 0.85rem; margin-bottom: 10px;">ISDB | Saudi Arabia Project</h4>
+                <p style="font-size: 0.9rem;">Managed docs using SAP/Jira; reduced approval times by 20%.</p>
             </div>
             <div class="time-item reveal">
                 <span style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem;">May 2022 – Nov 2024</span>
-                <h3 style="margin: 5px 0;">IT Business Analyst & Technical Support (Volunteer)</h3>
-                <h4 style="color: var(--text-s); font-size: 0.85rem; margin-bottom: 10px;">Altanmiah Alejabiah Association (Non-Profit)</h4>
-                <p style="font-size: 0.9rem;">Designed interactive Looker dashboards and reports to support data-driven strategies for over 16,000 leadership participants.</p>
-            </div>
-            <div class="time-item reveal">
-                <span style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem;">Jan 2021 – Feb 2022</span>
-                <h3 style="margin: 5px 0;">IT Business Analyst & Technical Support (Volunteer)</h3>
-                <h4 style="color: var(--text-s); font-size: 0.85rem; margin-bottom: 10px;">Sawaeid Center (Non-Profit)</h4>
-                <p style="font-size: 0.9rem;">Documented and analysed work procedures, conducting stakeholder interviews to evaluate system effectiveness and delivered findings to senior decision-makers.</p>
-            </div>
-            <div class="time-item reveal">
-                <span style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem;">Jul 2019 – Sep 2020</span>
-                <h3 style="margin: 5px 0;">Project Management Coordinator</h3>
-                <h4 style="color: var(--text-s); font-size: 0.85rem; margin-bottom: 10px;">Modernization & Development of Slaughterhouses Project – ISDB</h4>
-                <p style="font-size: 0.9rem;">Managed timelines and budgets, defining project requirements with consulting firms and maintained accurate documentation for compliance.</p>
+                <h3 style="margin: 5px 0;">IT Business Analyst (Volunteer)</h3>
+                <h4 style="color: var(--text-s); font-size: 0.85rem; margin-bottom: 10px;">Altanmiah Alejabiah</h4>
+                <p style="font-size: 0.9rem;">Dashboards for 16,000+ leadership participants.</p>
             </div>
         </div>
     </section>
 
-    <!-- AI Job Matcher Section -->
     <section id="matcher">
         <div class="job-analyzer reveal">
             <h2 style="margin-bottom: 20px;">✨ AI Job Fit Analyzer</h2>
-            <p style="color: var(--text-s); margin-bottom: 25px;">Recruiters: Paste your job description below to see how Hani's experience aligns with your specific needs.</p>
+            <p style="color: var(--text-s); margin-bottom: 25px;">Recruiters: Paste your job description below.</p>
             <textarea id="job-desc" class="job-input" placeholder="Paste Job Description here..."></textarea>
             <button onclick="analyzeJobFit()" class="btn btn-p">✨ Analyze Match</button>
-            <div id="match-result" style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.1); border-radius: 10px; display: none;">
-                <!-- Result injected here -->
-            </div>
+            <div id="match-result" style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.1); border-radius: 10px; display: none;"></div>
         </div>
     </section>
 
-    <!-- Education & Languages Section -->
     <section id="education">
-        <h2 class="reveal" style="margin-bottom: 40px;">Education & Languages</h2>
+        <h2 class="reveal" style="margin-bottom: 40px;">Education</h2>
         <div class="grid">
             <div class="card reveal">
-                <span style="color: var(--accent-1); font-weight: 800;">Sept 2025 – Sept 2026 (Expected)</span>
+                <span style="color: var(--accent-1); font-weight: 800;">2025 - 2026 (Expected)</span>
                 <h3>MSc Business Analytics</h3>
                 <p style="font-size: 0.9rem;">Kingston University, London, UK</p>
             </div>
             <div class="card reveal">
                 <span style="color: var(--accent-1); font-weight: 800;">BSc (Honors)</span>
                 <h3>IT & Computing</h3>
-                <p style="font-size: 0.9rem;">The Open University, UK — Second Class Honors (2nd Division)</p>
-            </div>
-            <div class="card reveal">
-                <span style="color: var(--accent-1); font-weight: 800;">Diploma</span>
-                <h3>Level 2 Digital & IT Skills</h3>
-                <p style="font-size: 0.9rem;">Just IT Training, England, UK</p>
-            </div>
-        </div>
-        <div class="reveal" style="margin-top: 30px; display: flex; flex-wrap: wrap; gap: 20px;">
-            <div style="background: var(--surface); padding: 15px 25px; border-radius: var(--radius); border: 1px solid var(--border);">
-                <strong>Arabic</strong> <span style="color: var(--text-s); font-size: 0.8rem;">Native</span>
-            </div>
-            <div style="background: var(--surface); padding: 15px 25px; border-radius: var(--radius); border: 1px solid var(--border);">
-                <strong>English</strong> <span style="color: var(--text-s); font-size: 0.8rem;">Fluent / Professional</span>
+                <p style="font-size: 0.9rem;">The Open University, UK</p>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
         <h2 class="reveal" style="text-align: center; margin-bottom: 50px;">Let's Collaborate</h2>
         <div class="grid" style="align-items: center;">
@@ -453,27 +420,18 @@
                         <div>07477360962</div>
                     </div>
                 </div>
-                <div class="card" style="display: flex; align-items: center; gap: 20px;">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center; color: var(--accent-1);">📍</div>
-                    <div>
-                        <div style="font-size: 0.7rem; color: var(--accent-1); font-weight: 800;">LOCATION</div>
-                        <div>Greater London, UK</div>
-                    </div>
-                </div>
             </div>
             <div class="reveal">
                 <div class="ripple-container">
                     <div class="ripple"></div>
                     <div class="ripple" style="animation-delay: 1s;"></div>
                     <div class="ripple" style="animation-delay: 2s;"></div>
-                    <!-- Fixed object-fit to contain to prevent face zoom/clipping -->
                     <img src="personal_picture.png" alt="Hani Alsakani" style="z-index: 2; width: 100%; height: 100%; border-radius: 50%; object-fit: contain; border: 3px solid var(--accent-1);">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Marquee Animation Bar -->
     <div class="marquee">
         <div class="m-content">
             <div class="m-item">ISDB</div>
@@ -481,7 +439,6 @@
             <div class="m-item">ALTANMIAH ALEJABIAH</div>
             <div class="m-item">SAWAEID CENTER</div>
             <div class="m-item">OPEN UNIVERSITY</div>
-            <!-- Duplicate for seamless loop -->
             <div class="m-item">ISDB</div>
             <div class="m-item">KINGSTON UNIVERSITY</div>
             <div class="m-item">ALTANMIAH ALEJABIAH</div>
@@ -490,16 +447,13 @@
         </div>
     </div>
 
-    <!-- AI Window -->
     <button class="ai-chat-btn" onclick="toggleAI()">✨</button>
     <div class="ai-win" id="ai-window">
         <div style="padding: 20px; border-bottom: 1px solid var(--border); background: var(--surface); display: flex; justify-content: space-between;">
             <span style="font-weight: 800; font-size: 0.8rem;">✨ AI BI ASSISTANT</span>
             <button onclick="toggleAI()" style="background:none; border:none; color:var(--text-p); cursor:pointer;">✕</button>
         </div>
-        <div id="ai-messages" style="flex:1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
-            <div style="background: var(--surface); padding: 10px; border-radius: 10px;">Hello! I'm Hani's digital assistant. Ask me about his professional history or BI expertise.</div>
-        </div>
+        <div id="ai-messages" style="flex:1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;"></div>
         <div style="padding: 15px; border-top: 1px solid var(--border); display: flex; gap: 8px;">
             <input type="text" id="ai-input" placeholder="Type here..." style="flex:1; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text-p); padding: 10px; outline: none;">
             <button onclick="sendMessage()" style="background: var(--accent-1); border:none; color:white; padding: 0 20px; border-radius: 8px; cursor: pointer;">➤</button>
@@ -507,20 +461,15 @@
     </div>
 
     <script>
-        const apiKey = "AIzaSyBFM9sVQ4bG5aCHDUejiBMq1G_kQUhIADc";
-        const cvFullContent = `
-            Hani Alsakani - Business Analyst based in Greater London.
-            Experience:
-            - ISDB Technical Assistant (May 2022 - Nov 2024): Managed docs via SAP/Jira, reduced approval times by 20%.
-            - Altanmiah BI Analyst (Volunteer): Designed Looker dashboards for 16,000+ participants.
-            - Sawaeid Center BA: Analysed work procedures, conducted stakeholder interviews.
-            - Modernization Project Coordinator: Managed timelines/budgets with consulting firms.
-            Education:
-            - MSc Business Analytics (Expected 2026), Kingston University.
-            - BSc IT & Computing, The Open University.
-            Skills: Looker (expert), Power BI, Tableau, Excel, Python, SQL, SAP, Jira, GDPR, Agile.
-            Key Achievement: 30% efficiency increase in decision-making via dashboards.
-        `;
+        const apiKey = "AIzaSyBFM9sVQ4bG5aCHDUejiBMq1G_kQUhIADc"; // PLEASE PASTE YOUR GEMINI API KEY HERE
+        const cvFullContent = "Hani Alsakani, London Business Analyst. Expert in Looker, Power BI. MSc Kingston University. 30% Efficiency increase.";
+
+        function toggleMenu() {
+            const links = document.getElementById('nav-links');
+            if (window.innerWidth <= 968) {
+                links.classList.toggle('active');
+            }
+        }
 
         function setTheme(theme) {
             document.body.setAttribute('data-theme', theme);
@@ -534,10 +483,7 @@
         document.addEventListener('mousemove', (e) => {
             dot.style.left = e.clientX + 'px';
             dot.style.top = e.clientY + 'px';
-            setTimeout(() => {
-                ring.style.left = e.clientX - 17 + 'px';
-                ring.style.top = e.clientY - 17 + 'px';
-            }, 60);
+            setTimeout(() => { ring.style.left = e.clientX - 17 + 'px'; ring.style.top = e.clientY - 17 + 'px'; }, 60);
         });
 
         const canvas = document.getElementById('particle-canvas');
@@ -565,38 +511,33 @@
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         function triggerSkills() { document.querySelectorAll('.fill').forEach(f => { f.style.width = f.getAttribute('data-w') + '%'; }); }
 
-        async function fetchGemini(prompt, systemInstruction) {
+        async function fetchGemini(prompt, sys) {
             try {
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }],
-                        systemInstruction: { parts: [{ text: systemInstruction }] }
-                    })
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], systemInstruction: { parts: [{ text: sys }] } })
                 });
                 const data = await response.json();
                 return data.candidates?.[0]?.content?.parts?.[0]?.text || "Response failed.";
-            } catch (err) { return "Hani's AI is busy. Check API key."; }
+            } catch (err) { return "Hani's AI is currently in idle mode. Please check the API key setup."; }
         }
 
         async function generateSummary() {
             const overlay = document.getElementById('summary-overlay');
             const content = document.getElementById('summary-content');
             overlay.classList.add('active');
-            content.innerText = "Synthesizing career insights...";
-            const result = await fetchGemini("Summarize Hani's career in 3 bullet points.", `Recruiter Assistant. Data: ${cvFullContent}`);
+            content.innerText = "Analyzing career data...";
+            const result = await fetchGemini("3 bullet summary of Hani Alsakani.", `Recruiter Assistant for Hani: ${cvFullContent}`);
             content.innerText = result;
         }
 
         async function analyzeJobFit() {
             const jd = document.getElementById('job-desc').value;
-            const resultDiv = document.getElementById('match-result');
+            const res = document.getElementById('match-result');
             if (!jd.trim()) return;
-            resultDiv.style.display = 'block';
-            resultDiv.innerText = "Comparing profile to JD...";
-            const result = await fetchGemini(`Compare with JD: ${jd}`, `HR Expert. Profile: ${cvFullContent}`);
-            resultDiv.innerText = result;
+            res.style.display = 'block'; res.innerText = "Comparing match...";
+            const result = await fetchGemini(`Compare with JD: ${jd}`, `HR Expert for Hani Alsakani: ${cvFullContent}`);
+            res.innerText = result;
         }
 
         function toggleAI() { document.getElementById('ai-window').classList.toggle('open'); }
@@ -605,16 +546,14 @@
             const box = document.getElementById('ai-messages');
             if (!input.value.trim()) return;
             const uMsg = document.createElement('div');
-            uMsg.style = "align-self: flex-end; background: var(--accent-1); color: white; padding: 10px; border-radius: 10px; max-width: 85%;";
-            uMsg.innerText = input.value;
-            box.appendChild(uMsg);
+            uMsg.style = "align-self: flex-end; background: var(--accent-1); color: white; padding: 10px; border-radius: 10px; max-width: 85%; margin-bottom: 5px;";
+            uMsg.innerText = input.value; box.appendChild(uMsg);
             const p = input.value; input.value = ""; box.scrollTop = box.scrollHeight;
             const lMsg = document.createElement('div');
             lMsg.style = "align-self: flex-start; background: var(--surface); padding: 10px; border-radius: 10px; border: 1px solid var(--border);";
-            lMsg.innerText = "..."; box.appendChild(lMsg);
-            const res = await fetchGemini(p, `Hani's Assistant. Data: ${cvFullContent}`);
-            lMsg.innerText = res;
-            box.scrollTop = box.scrollHeight;
+            lMsg.innerText = "Thinking..."; box.appendChild(lMsg);
+            const res = await fetchGemini(p, `Hani Alsakani's Personal Assistant: ${cvFullContent}`);
+            lMsg.innerText = res; box.scrollTop = box.scrollHeight;
         }
     </script>
 </body>
