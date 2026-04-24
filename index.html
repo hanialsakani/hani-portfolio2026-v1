@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hani Alsakani | Professional Multi-Theme Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@600;700;800&family=Playfair+Display:wght@700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================
+           1. THEME ENGINE - VARIABLES
+        ========================================= */
+        :root {
+            /* Default: Cyber-Glow Analytics */
+            --bg: #0a0a0c;
+            --surface: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --accent-1: #6366f1;
+            --accent-2: #ec4899;
+            --accent-3: #22d3ee;
+            --text-p: #e2e8f0;
+            --text-s: #94a3b8;
+            --font-h: 'Syne', sans-serif;
+            --font-b: 'DM Sans', sans-serif;
+            --radius: 50px;
+            --grid-op: 0;
+            --cursor: #22d3ee;
+        }
+
+        body[data-theme="executive"] {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --border: #e2e8f0;
+            --accent-1: #1e3a8a;
+            --accent-2: #92400e;
+            --accent-3: #1e3a8a;
+            --text-p: #0f172a;
+            --text-s: #475569;
+            --font-h: 'Playfair Display', serif;
+            --font-b: 'DM Sans', sans-serif;
+            --radius: 4px;
+            --grid-op: 0.05;
+            --cursor: #1e3a8a;
+        }
+
+        body[data-theme="bento"] {
+            --bg: #000000;
+            --surface: #111111;
+            --border: #222222;
+            --accent-1: #10b981;
+            --accent-2: #34d399;
+            --accent-3: #10b981;
+            --text-p: #ffffff;
+            --text-s: #a1a1aa;
+            --font-h: 'Space Grotesk', sans-serif;
+            --font-b: 'Space Grotesk', sans-serif;
+            --radius: 30px;
+            --grid-op: 0;
+            --cursor: #10b981;
+        }
+
+        body[data-theme="minimal"] {
+            --bg: #ffffff;
+            --surface: transparent;
+            --border: #000000;
+            --accent-1: #000000;
+            --accent-2: #000000;
+            --accent-3: #000000;
+            --text-p: #000000;
+            --text-s: #444444;
+            --font-h: 'DM Sans', sans-serif;
+            --font-b: 'DM Sans', sans-serif;
+            --radius: 0px;
+            --grid-op: 0;
+            --cursor: #000000;
+        }
+
+        /* =========================================
+           2. CORE LAYOUT
+        ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg);
+            color: var(--text-p);
+            font-family: var(--font-b);
+            transition: background 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4 { font-family: var(--font-h); text-transform: uppercase; }
+
+        /* Grid Background Overlay */
+        body::before {
+            content: ""; position: fixed; inset: 0;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px; opacity: var(--grid-op); pointer-events: none; z-index: -1;
+        }
+
+        #particle-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 1.2rem 10%; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(var(--bg), 0.8); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-p); font-size: 0.7rem;
+            font-weight: 800; letter-spacing: 1px; transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-1); }
+
+        /* Theme Switcher */
+        .theme-selector { position: relative; }
+        .theme-btn {
+            background: var(--accent-1); color: white; border: none;
+            padding: 8px 16px; border-radius: 50px; font-weight: 800; font-size: 0.7rem; cursor: pointer;
+        }
+        .theme-menu {
+            position: absolute; top: 110%; right: 0; background: var(--surface);
+            border: 1px solid var(--border); border-radius: 12px; display: none;
+            flex-direction: column; min-width: 200px; backdrop-filter: blur(20px); overflow: hidden;
+        }
+        .theme-selector:hover .theme-menu { display: flex; }
+        .theme-menu button {
+            background: none; border: none; color: var(--text-p); padding: 12px;
+            text-align: left; cursor: pointer; font-size: 0.75rem; transition: 0.2s;
+        }
+        .theme-menu button:hover { background: var(--accent-1); color: white; }
+
+        /* Sections */
+        section { padding: 120px 10% 60px; min-height: 80vh; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Hero */
+        .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
+        .hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.9; margin-bottom: 20px; }
+        .hero p { font-size: 1.1rem; color: var(--text-s); margin-bottom: 40px; max-width: 550px; }
+        
+        .cta-group { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn {
+            padding: 12px 24px; border-radius: var(--radius); text-decoration: none;
+            font-weight: 700; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
+            cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .btn-p { background: var(--accent-1); color: white; border: 1px solid var(--accent-1); }
+        .btn-s { background: transparent; border: 1px solid var(--border); color: var(--text-p); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .btn-p:hover { background: transparent; color: var(--accent-1); }
+        .btn-s:hover { border-color: var(--accent-1); color: var(--accent-1); }
+
+        /* Stats Card */
+        .stats-box {
+            background: var(--surface); border: 1px solid var(--border);
+            padding: 40px; border-radius: var(--radius); text-align: center;
+        }
+        .stat-val { font-size: 3.5rem; font-weight: 900; color: var(--accent-1); display: block; }
+        .stat-lbl { font-size: 0.7rem; letter-spacing: 2px; color: var(--text-s); }
+
+        /* Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card {
+            background: var(--surface); border: 1px solid var(--border);
+            padding: 30px; border-radius: var(--radius); transition: 0.4s;
+        }
+        .card:hover { border-color: var(--accent-1); transform: translateY(-5px); }
+        
+        /* Skill Bars */
+        .track { height: 8px; background: rgba(128,128,128,0.1); border-radius: 10px; margin-top: 15px; overflow: hidden; }
+        .fill { height: 100%; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); width: 0; transition: 2s; }
+
+        /* Timeline */
+        .timeline { border-left: 2px solid var(--border); padding-left: 30px; position: relative; }
+        .time-item { margin-bottom: 50px; position: relative; }
+        .time-item::before {
+            content: ""; position: absolute; left: -37px; top: 0;
+            width: 12px; height: 12px; background: var(--bg); border: 2px solid var(--accent-1); border-radius: 50%;
+        }
+
+        /* Ripple Visuals for Contact */
+        .ripple-container { position: relative; width: 150px; height: 150px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+        .ripple { position: absolute; border: 2px solid var(--accent-1); border-radius: 50%; width: 100%; height: 100%; animation: rip 3s infinite; }
+        @keyframes rip { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
+
+        /* Cursor */
+        .dot { width: 8px; height: 8px; background: var(--cursor); position: fixed; border-radius: 50%; pointer-events: none; z-index: 10001; }
+        .ring { width: 35px; height: 35px; border: 1px solid var(--cursor); position: fixed; border-radius: 50%; pointer-events: none; z-index: 10001; transition: 0.1s ease-out; }
+
+        /* AI Assistant Window */
+        .ai-chat-btn {
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+            background: var(--accent-1); border-radius: 50%; border: none; color: white;
+            font-size: 1.5rem; z-index: 2000; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .ai-win {
+            position: fixed; bottom: 100px; right: 30px; width: 350px; height: 500px;
+            background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+            z-index: 1999; display: none; flex-direction: column; overflow: hidden; backdrop-filter: blur(20px);
+        }
+        .ai-win.open { display: flex; }
+
+        /* AI Feature Components */
+        .summary-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 5000;
+            display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px);
+        }
+        .summary-overlay.active { display: flex; }
+        .summary-card {
+            background: var(--bg); border: 1px solid var(--accent-1); padding: 40px;
+            border-radius: var(--radius); max-width: 600px; width: 90%; position: relative;
+        }
+        .summary-loader { width: 100%; height: 2px; background: var(--accent-1); position: absolute; top: 0; left: 0; animation: loadingLine 2s infinite; }
+        @keyframes loadingLine { 0% { width: 0; left: 0; } 50% { width: 100%; left: 0; } 100% { width: 0; left: 100%; } }
+
+        .job-analyzer {
+            margin-top: 50px; background: var(--surface); border: 1px solid var(--border);
+            padding: 40px; border-radius: var(--radius);
+        }
+        .job-input {
+            width: 100%; min-height: 120px; background: rgba(0,0,0,0.1); border: 1px solid var(--border);
+            border-radius: 10px; color: var(--text-p); padding: 15px; font-family: var(--font-b);
+            margin-bottom: 20px; outline: none; resize: vertical;
+        }
+
+        /* Marquee Animation Bar */
+        .marquee { 
+            width: 100%; 
+            overflow: hidden; 
+            padding: 30px 0; 
+            background: var(--surface); 
+            margin: 40px 0; 
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .m-content { 
+            display: flex; 
+            width: max-content; 
+            gap: 100px; 
+            white-space: nowrap; 
+            animation: scroll-marquee 30s linear infinite; 
+        }
+        .m-item { 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            color: var(--text-s); 
+            opacity: 0.3; 
+            flex-shrink: 0;
+            font-family: var(--font-h);
+        }
+        @keyframes scroll-marquee { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-50%); } 
+        }
+
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .nav-links { display: none; }
+            .cta-group { justify-content: center; }
+        }
+    </style>
+</head>
+<body data-theme="cyber">
+
+    <div class="dot"></div>
+    <div class="ring"></div>
+    <canvas id="particle-canvas"></canvas>
+
+    <nav>
+        <div class="syne" style="font-weight: 800; color: var(--accent-1);">HANI.ALSAKANI</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#matcher">✨ Matcher</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="theme-selector">
+                <button class="theme-btn">🎨 THEMES</button>
+                <div class="theme-menu">
+                    <button onclick="setTheme('cyber')">🌌 Cyber-Glow Analytics</button>
+                    <button onclick="setTheme('executive')">🏛️ The Executive Consultant</button>
+                    <button onclick="setTheme('bento')">🍱 The Bento Dashboard</button>
+                    <button onclick="setTheme('minimal')">🎯 The Pure Impact</button>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about" class="hero">
+        <div class="reveal">
+            <div style="font-weight: 800; color: var(--accent-1); letter-spacing: 2px; margin-bottom: 10px; font-size: 0.7rem;">GREATER LONDON, UK</div>
+            <h1>Hani Alsakani</h1>
+            <p>
+                Results-driven Business Analyst with a proven track record in <strong>Looker BI</strong>, data analysis, and process optimization. Delivering actionable insights that improve efficiency by 30%.
+            </p>
+            <div class="cta-group">
+                <button onclick="generateSummary()" class="btn btn-p">✨ Quick Summary</button>
+                <button onclick="toggleAI()" class="btn btn-s">🗨️ Chat with AI</button>
+                <a href="hani-alsakani-cv.pdf" download class="btn btn-s">Download CV (PDF)</a>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="stats-box">
+                <span class="stat-val">30%</span>
+                <span class="stat-lbl">EFFICIENCY INCREASE</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Summary Overlay -->
+    <div id="summary-overlay" class="summary-overlay" onclick="this.classList.remove('active')">
+        <div class="summary-card" onclick="event.stopPropagation()">
+            <div id="summary-loader" class="summary-loader"></div>
+            <h3 style="margin-bottom: 20px;">✨ AI Professional Summary</h3>
+            <div id="summary-content" style="font-size: 0.95rem; color: var(--text-p);">
+                Generating custom career snapshot...
+            </div>
+            <button onclick="document.getElementById('summary-overlay').classList.remove('active')" class="btn btn-s" style="margin-top: 30px; width: 100%;">Close</button>
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="reveal" style="margin-bottom: 40px;">Technical Expertise</h2>
+        <div class="grid">
+            <div class="card reveal">
+                <h3>Looker & BI</h3>
+                <div class="track"><div class="fill" data-w="95"></div></div>
+                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-s);">Expert-level dashboard design and data storytelling.</p>
+            </div>
+            <div class="card reveal">
+                <h3>Data Analysis</h3>
+                <div class="track"><div class="fill" data-w="90"></div></div>
+                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-s);">Excel, Power BI, and Tableau for strategic planning.</p>
+            </div>
+            <div class="card reveal">
+                <h3>Programming</h3>
+                <div class="track"><div class="fill" data-w="65"></div></div>
+                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-s);">Foundational Python, SQL, and Full-stack knowledge.</p>
+            </div>
+        </div>
+        <div class="reveal" style="margin-top: 40px; display: flex; flex-wrap: wrap; gap: 10px;">
+            <span style="background: var(--surface); padding: 8px 15px; border-radius: 100px; font-size: 0.75rem; border: 1px solid var(--border);">SAP</span>
+            <span style="background: var(--surface); padding: 8px 15px; border-radius: 100px; font-size: 0.75rem; border: 1px solid var(--border);">Jira</span>
+            <span style="background: var(--surface); padding: 8px 15px; border-radius: 100px; font-size: 0.75rem; border: 1px solid var(--border);">GDPR Compliance</span>
+            <span style="background: var(--surface); padding: 8px 15px; border-radius: 100px; font-size: 0.75rem; border: 1px solid var(--border);">Agile Methodology</span>
+            <span style="background: var(--surface); padding: 8px 15px; border-radius: 100px; font-size: 0.75rem; border: 1px solid var(--border);">GitHub</span>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="reveal" style="margin-bottom: 40px;">Professional History</h2>
+        <div class="timeline">
+            <div class="time-item reveal">
+                <span style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem;">May 2022 – Nov 2024</span>
+                <h3 style="margin: 5px 0;">Technical & Administrative Assistant</h3>
+                <h4 style="color: var(--text-s); font-size: 0.85rem; margin-bottom: 10px;">ISDB | Kingdom of Saudi Arabia Project for Utilization of Hady & Adahi</h4>
+                <p style="font-size: 0.9rem;">Managed project documentation using SAP and Jira; reduced approval times by 20% through workflow optimization and coordinated logistics for beneficiary country collaborations.</p>
+            </div>
+            <div class="time-item reveal">
+                <span style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem;">May 2022 – Nov 2024</span>
+                <h3 style="margin: 5px 0;">IT Business Analyst & Technical Support (Volunteer)</h3>
+                <h4 style="color: var(--text-s); font-size: 0.85rem; margin-bottom: 10px;">Altanmiah Alejabiah Association (Non-Profit)</h4>
+                <p style="font-size: 0.9rem;">Designed interactive Looker dashboards and reports to support data-driven strategies for over 16,000 leadership participants.</p>
+            </div>
+            <div class="time-item reveal">
+                <span style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem;">Jan 2021 – Feb 2022</span>
+                <h3 style="margin: 5px 0;">IT Business Analyst & Technical Support (Volunteer)</h3>
+                <h4 style="color: var(--text-s); font-size: 0.85rem; margin-bottom: 10px;">Sawaeid Center (Non-Profit)</h4>
+                <p style="font-size: 0.9rem;">Documented and analysed work procedures, conducting stakeholder interviews to evaluate system effectiveness and delivered findings to senior decision-makers.</p>
+            </div>
+            <div class="time-item reveal">
+                <span style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem;">Jul 2019 – Sep 2020</span>
+                <h3 style="margin: 5px 0;">Project Management Coordinator</h3>
+                <h4 style="color: var(--text-s); font-size: 0.85rem; margin-bottom: 10px;">Modernization & Development of Slaughterhouses Project – ISDB</h4>
+                <p style="font-size: 0.9rem;">Managed timelines and budgets, defining project requirements with consulting firms and maintained accurate documentation for compliance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Job Matcher Section -->
+    <section id="matcher">
+        <div class="job-analyzer reveal">
+            <h2 style="margin-bottom: 20px;">✨ AI Job Fit Analyzer</h2>
+            <p style="color: var(--text-s); margin-bottom: 25px;">Recruiters: Paste your job description below to see how Hani's experience aligns with your specific needs.</p>
+            <textarea id="job-desc" class="job-input" placeholder="Paste Job Description here..."></textarea>
+            <button onclick="analyzeJobFit()" class="btn btn-p">✨ Analyze Match</button>
+            <div id="match-result" style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.1); border-radius: 10px; display: none;">
+                <!-- Result injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Languages Section -->
+    <section id="education">
+        <h2 class="reveal" style="margin-bottom: 40px;">Education & Languages</h2>
+        <div class="grid">
+            <div class="card reveal">
+                <span style="color: var(--accent-1); font-weight: 800;">Sept 2025 – Sept 2026 (Expected)</span>
+                <h3>MSc Business Analytics</h3>
+                <p style="font-size: 0.9rem;">Kingston University, London, UK</p>
+            </div>
+            <div class="card reveal">
+                <span style="color: var(--accent-1); font-weight: 800;">BSc (Honors)</span>
+                <h3>IT & Computing</h3>
+                <p style="font-size: 0.9rem;">The Open University, UK — Second Class Honors (2nd Division)</p>
+            </div>
+            <div class="card reveal">
+                <span style="color: var(--accent-1); font-weight: 800;">Diploma</span>
+                <h3>Level 2 Digital & IT Skills</h3>
+                <p style="font-size: 0.9rem;">Just IT Training, England, UK</p>
+            </div>
+        </div>
+        <div class="reveal" style="margin-top: 30px; display: flex; flex-wrap: wrap; gap: 20px;">
+            <div style="background: var(--surface); padding: 15px 25px; border-radius: var(--radius); border: 1px solid var(--border);">
+                <strong>Arabic</strong> <span style="color: var(--text-s); font-size: 0.8rem;">Native</span>
+            </div>
+            <div style="background: var(--surface); padding: 15px 25px; border-radius: var(--radius); border: 1px solid var(--border);">
+                <strong>English</strong> <span style="color: var(--text-s); font-size: 0.8rem;">Fluent / Professional</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="reveal" style="text-align: center; margin-bottom: 50px;">Let's Collaborate</h2>
+        <div class="grid" style="align-items: center;">
+            <div class="reveal">
+                <div class="card" style="margin-bottom: 15px; display: flex; align-items: center; gap: 20px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center; color: var(--accent-1);">@</div>
+                    <div>
+                        <div style="font-size: 0.7rem; color: var(--accent-1); font-weight: 800;">EMAIL</div>
+                        <div>hanialsakani@gmail.com</div>
+                    </div>
+                </div>
+                <div class="card" style="margin-bottom: 15px; display: flex; align-items: center; gap: 20px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center; color: var(--accent-1);">📞</div>
+                    <div>
+                        <div style="font-size: 0.7rem; color: var(--accent-1); font-weight: 800;">PHONE</div>
+                        <div>07477360962</div>
+                    </div>
+                </div>
+                <div class="card" style="display: flex; align-items: center; gap: 20px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center; color: var(--accent-1);">📍</div>
+                    <div>
+                        <div style="font-size: 0.7rem; color: var(--accent-1); font-weight: 800;">LOCATION</div>
+                        <div>Greater London, UK</div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal">
+                <div class="ripple-container">
+                    <div class="ripple"></div>
+                    <div class="ripple" style="animation-delay: 1s;"></div>
+                    <div class="ripple" style="animation-delay: 2s;"></div>
+                    <img src="personal_picture.jpg" alt="Hani Alsakani" style="z-index: 2; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-1);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Animation Bar -->
+    <div class="marquee">
+        <div class="m-content">
+            <div class="m-item">ISDB</div>
+            <div class="m-item">KINGSTON UNIVERSITY</div>
+            <div class="m-item">ALTANMIAH ALEJABIAH</div>
+            <div class="m-item">SAWAEID CENTER</div>
+            <div class="m-item">OPEN UNIVERSITY</div>
+            <!-- Duplicate for seamless loop -->
+            <div class="m-item">ISDB</div>
+            <div class="m-item">KINGSTON UNIVERSITY</div>
+            <div class="m-item">ALTANMIAH ALEJABIAH</div>
+            <div class="m-item">SAWAEID CENTER</div>
+            <div class="m-item">OPEN UNIVERSITY</div>
+        </div>
+    </div>
+
+    <!-- AI Window -->
+    <button class="ai-chat-btn" onclick="toggleAI()">✨</button>
+    <div class="ai-win" id="ai-window">
+        <div style="padding: 20px; border-bottom: 1px solid var(--border); background: var(--surface); display: flex; justify-content: space-between;">
+            <span style="font-weight: 800; font-size: 0.8rem;">✨ AI BI ASSISTANT</span>
+            <button onclick="toggleAI()" style="background:none; border:none; color:var(--text-p); cursor:pointer;">✕</button>
+        </div>
+        <div id="ai-messages" style="flex:1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+            <div style="background: var(--surface); padding: 10px; border-radius: 10px;">Hello! I'm Hani's digital assistant. Ask me about his professional history or BI expertise.</div>
+        </div>
+        <div style="padding: 15px; border-top: 1px solid var(--border); display: flex; gap: 8px;">
+            <input type="text" id="ai-input" placeholder="Type here..." style="flex:1; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text-p); padding: 10px; outline: none;">
+            <button onclick="sendMessage()" style="background: var(--accent-1); border:none; color:white; padding: 0 20px; border-radius: 8px; cursor: pointer;">➤</button>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = "";
+        const cvFullContent = `
+            Hani Alsakani - Business Analyst based in Greater London.
+            Experience:
+            - ISDB Technical Assistant (May 2022 - Nov 2024): Managed docs via SAP/Jira, reduced approval times by 20%.
+            - Altanmiah BI Analyst (Volunteer): Designed Looker dashboards for 16,000+ participants.
+            - Sawaeid Center BA: Analysed work procedures, conducted stakeholder interviews.
+            - Modernization Project Coordinator: Managed timelines/budgets with consulting firms.
+            Education:
+            - MSc Business Analytics (Expected 2026), Kingston University.
+            - BSc IT & Computing, The Open University.
+            Skills: Looker (expert), Power BI, Tableau, Excel, Python, SQL, SAP, Jira, GDPR, Agile.
+            Key Achievement: 30% efficiency increase in decision-making via dashboards.
+        `;
+
+        function setTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            const canvas = document.getElementById('particle-canvas');
+            if(canvas) canvas.style.opacity = (theme === 'cyber') ? '1' : '0';
+            triggerSkills();
+        }
+
+        const dot = document.querySelector('.dot');
+        const ring = document.querySelector('.ring');
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+            setTimeout(() => {
+                ring.style.left = e.clientX - 17 + 'px';
+                ring.style.top = e.clientY - 17 + 'px';
+            }, 60);
+        });
+
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        class Particle {
+            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2; this.vx = Math.random() * 0.4 - 0.2; this.vy = Math.random() * 0.4 - 0.2; }
+            update() { this.x += this.vx; this.y += this.vy; if (this.x > canvas.width || this.x < 0) this.vx *= -1; if (this.y > canvas.height || this.y < 0) this.vy *= -1; }
+            draw() { ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-1'); ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        }
+        function createParticles() { particles = []; for (let i = 0; i < 60; i++) particles.push(new Particle()); }
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        window.addEventListener('resize', initCanvas);
+        initCanvas(); createParticles(); animate();
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (entry.target.id === 'skills' || entry.target.closest('#skills')) triggerSkills();
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        function triggerSkills() { document.querySelectorAll('.fill').forEach(f => { f.style.width = f.getAttribute('data-w') + '%'; }); }
+
+        async function fetchGemini(prompt, systemInstruction) {
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        systemInstruction: { parts: [{ text: systemInstruction }] }
+                    })
+                });
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "Response failed.";
+            } catch (err) { return "Hani's AI is busy. Check API key."; }
+        }
+
+        async function generateSummary() {
+            const overlay = document.getElementById('summary-overlay');
+            const content = document.getElementById('summary-content');
+            overlay.classList.add('active');
+            content.innerText = "Synthesizing career insights...";
+            const result = await fetchGemini("Summarize Hani's career in 3 bullet points.", `Recruiter Assistant. Data: ${cvFullContent}`);
+            content.innerText = result;
+        }
+
+        async function analyzeJobFit() {
+            const jd = document.getElementById('job-desc').value;
+            const resultDiv = document.getElementById('match-result');
+            if (!jd.trim()) return;
+            resultDiv.style.display = 'block';
+            resultDiv.innerText = "Comparing profile to JD...";
+            const result = await fetchGemini(`Compare with JD: ${jd}`, `HR Expert. Profile: ${cvFullContent}`);
+            resultDiv.innerText = result;
+        }
+
+        function toggleAI() { document.getElementById('ai-window').classList.toggle('open'); }
+        async function sendMessage() {
+            const input = document.getElementById('ai-input');
+            const box = document.getElementById('ai-messages');
+            if (!input.value.trim()) return;
+            const uMsg = document.createElement('div');
+            uMsg.style = "align-self: flex-end; background: var(--accent-1); color: white; padding: 10px; border-radius: 10px; max-width: 85%;";
+            uMsg.innerText = input.value;
+            box.appendChild(uMsg);
+            const p = input.value; input.value = ""; box.scrollTop = box.scrollHeight;
+            const lMsg = document.createElement('div');
+            lMsg.style = "align-self: flex-start; background: var(--surface); padding: 10px; border-radius: 10px; border: 1px solid var(--border);";
+            lMsg.innerText = "..."; box.appendChild(lMsg);
+            const res = await fetchGemini(p, `Hani's Assistant. Data: ${cvFullContent}`);
+            lMsg.innerText = res;
+            box.scrollTop = box.scrollHeight;
+        }
+    </script>
+</body>
+</html>
