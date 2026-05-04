@@ -1,395 +1,345 @@
-<!-- [COMMIT_ID: HA-2026-04-25-REV09] - Fixed Mobile Text Alignment & Overlapping Issues -->
+<!-- [COMMIT_ID: HA-2026-05-04-REV10] - Major Design Upgrade -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hani Alsakani | Professional Portfolio  </title>
+    <title>Hani Alsakani | IT Business Analyst & Data Strategist</title>
+    <meta name="description" content="Hani Alsakani — IT Business Analyst based in Greater London. Expert in Tableau, Looker, SAP/Jira workflows, and executive data strategy. Open to new opportunities.">
+    <meta property="og:title" content="Hani Alsakani | IT Business Analyst">
+    <meta property="og:description" content="Results-driven IT Business Analyst specialising in Tableau, Looker, and data-driven strategy.">
     <meta property="og:image" content="https://hanialsakani.github.io/hani-portfolio2026-v1/thumbnail.png">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@600;700;800&family=Playfair+Display:wght@700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Syne:wght@600;700;800&family=Playfair+Display:wght@700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* =========================================
-           1. THEME ENGINE - VARIABLES
-        ========================================= */
         :root {
-            --bg: #0a0a0c;
-            --surface: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
-            --accent-1: #6366f1;
-            --accent-2: #ec4899;
-            --accent-3: #22d3ee;
-            --text-p: #e2e8f0;
-            --text-s: #94a3b8;
-            --font-h: 'Syne', sans-serif;
-            --font-b: 'DM Sans', sans-serif;
-            --radius: 50px;
-            --grid-op: 0;
-            --cursor: #22d3ee;
+            --bg: #0a0a0c; --surface: rgba(255,255,255,0.03); --surface-2: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.1); --accent-1: #6366f1; --accent-2: #ec4899; --accent-3: #22d3ee;
+            --text-p: #e2e8f0; --text-s: #94a3b8; --font-h: 'Syne',sans-serif; --font-b: 'DM Sans',sans-serif;
+            --radius: 50px; --grid-op: 0; --cursor: #22d3ee;
         }
-
+        body[data-theme="cyber"] {
+            --bg: #0a0a0c; --surface: rgba(255,255,255,0.03); --surface-2: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.1); --accent-1: #6366f1; --accent-2: #ec4899; --accent-3: #22d3ee;
+            --text-p: #e2e8f0; --text-s: #94a3b8; --font-h: 'Syne',sans-serif; --font-b: 'DM Sans',sans-serif;
+            --radius: 50px; --grid-op: 0; --cursor: #22d3ee;
+        }
         body[data-theme="executive"] {
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --border: #e2e8f0;
-            --accent-1: #1e3a8a;
-            --accent-2: #92400e;
-            --accent-3: #1e3a8a;
-            --text-p: #0f172a;
-            --text-s: #475569;
-            --font-h: 'Playfair Display', serif;
-            --font-b: 'DM Sans', sans-serif;
-            --radius: 4px;
-            --grid-op: 0.05;
-            --cursor: #1e3a8a;
+            --bg: #f8fafc; --surface: #ffffff; --surface-2: #f1f5f9; --border: #e2e8f0;
+            --accent-1: #1e3a8a; --accent-2: #92400e; --accent-3: #1e3a8a; --text-p: #0f172a;
+            --text-s: #475569; --font-h: 'Playfair Display',serif; --font-b: 'DM Sans',sans-serif;
+            --radius: 4px; --grid-op: 0.05; --cursor: #1e3a8a;
         }
-
         body[data-theme="bento"] {
-            --bg: #000000;
-            --surface: #111111;
-            --border: #222222;
-            --accent-1: #10b981;
-            --accent-2: #34d399;
-            --accent-3: #10b981;
-            --text-p: #ffffff;
-            --text-s: #a1a1aa;
-            --font-h: 'Space Grotesk', sans-serif;
-            --font-b: 'Space Grotesk', sans-serif;
-            --radius: 30px;
-            --grid-op: 0;
-            --cursor: #10b981;
+            --bg: #000000; --surface: #111111; --surface-2: #1a1a1a; --border: #222222;
+            --accent-1: #10b981; --accent-2: #34d399; --accent-3: #10b981; --text-p: #ffffff;
+            --text-s: #a1a1aa; --font-h: 'Space Grotesk',sans-serif; --font-b: 'Space Grotesk',sans-serif;
+            --radius: 30px; --grid-op: 0; --cursor: #10b981;
         }
-
         body[data-theme="minimal"] {
-            --bg: #ffffff;
-            --surface: transparent;
-            --border: #000000;
-            --accent-1: #000000;
-            --accent-2: #000000;
-            --accent-3: #000000;
-            --text-p: #000000;
-            --text-s: #444444;
-            --font-h: 'DM Sans', sans-serif;
-            --font-b: 'DM Sans', sans-serif;
-            --radius: 0px;
-            --grid-op: 0;
-            --cursor: #000000;
+            --bg: #ffffff; --surface: transparent; --surface-2: #f9f9f9; --border: #000000;
+            --accent-1: #000000; --accent-2: #000000; --accent-3: #000000; --text-p: #000000;
+            --text-s: #444444; --font-h: 'DM Sans',sans-serif; --font-b: 'DM Sans',sans-serif;
+            --radius: 0px; --grid-op: 0; --cursor: #000000;
         }
-
-        /* =========================================
-           2. CORE LAYOUT
-        ========================================= */
+        #progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+            z-index: 9999; transition: width 0.1s linear;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
         html { scroll-behavior: smooth; }
         body {
-            background-color: var(--bg);
-            color: var(--text-p);
-            font-family: var(--font-b);
-            transition: background 0.5s ease, color 0.5s ease;
-            overflow-x: hidden;
-            line-height: 1.6;
+            background-color: var(--bg); color: var(--text-p); font-family: var(--font-b);
+            transition: background 0.5s ease, color 0.5s ease; overflow-x: hidden; line-height: 1.6;
         }
         h1, h2, h3, h4 { font-family: var(--font-h); text-transform: uppercase; }
-
         body::before {
             content: ""; position: fixed; inset: 0;
             background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
             background-size: 50px 50px; opacity: var(--grid-op); pointer-events: none; z-index: -1;
         }
-
         #particle-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
-
         nav {
             position: fixed; top: 0; width: 100%; z-index: 1000;
             padding: 1rem 10%; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(var(--bg), 0.7); backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            transition: 0.3s;
+            background: rgba(10,10,12,0.75); backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border); transition: 0.3s;
         }
+        body[data-theme="executive"] nav { background: rgba(248,250,252,0.85); }
+        body[data-theme="minimal"] nav { background: rgba(255,255,255,0.9); }
+        .nav-logo { font-family: var(--font-h); font-weight: 800; color: var(--accent-1); font-size: 1.2rem; letter-spacing: 1px; text-decoration: none; }
         .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
         .nav-links a {
-            text-decoration: none; color: var(--text-p); font-size: 0.7rem;
-            font-weight: 700; letter-spacing: 1px; transition: 0.3s;
-            text-transform: uppercase;
-            position: relative;
+            text-decoration: none; color: var(--text-s); font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 1px; transition: 0.3s; text-transform: uppercase; position: relative; padding-bottom: 4px;
         }
-        .nav-links a:hover { color: var(--accent-1); }
-
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+            background: var(--accent-1); border-radius: 2px; transition: width 0.3s ease;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-1); }
+        .nav-links a.active::after, .nav-links a:hover::after { width: 100%; }
         .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            background: none; border: none; cursor: pointer;
-            padding: 10px; z-index: 1100;
+            display: none; flex-direction: column; gap: 6px;
+            background: none; border: none; cursor: pointer; padding: 10px; z-index: 1100;
         }
-        .menu-toggle span {
-            display: block; width: 25px; height: 2px;
-            background-color: var(--text-p); transition: 0.4s;
-        }
+        .menu-toggle span { display: block; width: 25px; height: 2px; background-color: var(--text-p); transition: 0.4s; }
         .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
         .menu-toggle.active span:nth-child(2) { opacity: 0; }
         .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
         .theme-selector { position: relative; }
         .theme-btn {
-            background: var(--accent-1); color: white; border: none;
-            padding: 8px 16px; border-radius: 50px; font-weight: 800; font-size: 0.7rem; cursor: pointer;
+            background: var(--accent-1); color: white; border: none; padding: 8px 16px;
+            border-radius: 50px; font-weight: 800; font-size: 0.7rem; cursor: pointer; transition: 0.3s;
         }
+        .theme-btn:hover { opacity: 0.85; transform: translateY(-1px); }
         .theme-menu {
-            position: absolute; top: 110%; right: 0; background: var(--surface);
+            position: absolute; top: 110%; right: 0; background: var(--bg);
             border: 1px solid var(--border); border-radius: 12px; display: none;
-            flex-direction: column; min-width: 200px; backdrop-filter: blur(30px); overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            flex-direction: column; min-width: 220px; backdrop-filter: blur(30px); overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
         }
         .theme-selector:hover .theme-menu { display: flex; }
         .theme-menu button {
-            background: none; border: none; color: var(--text-p); padding: 12px;
-            text-align: left; cursor: pointer; font-size: 0.75rem; transition: 0.2s;
+            background: none; border: none; color: var(--text-p); padding: 13px 16px;
+            text-align: left; cursor: pointer; font-size: 0.78rem; transition: 0.2s; font-family: var(--font-b);
         }
-        .theme-menu button:hover { background: var(--accent-1); color: white; }
-
+        .theme-menu button:hover { background: var(--accent-1); color: white; padding-left: 22px; }
         section { padding: 120px 10% 60px; min-height: 80vh; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.16,1,0.3,1); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
-        .hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.9; margin-bottom: 20px; }
+        .section-label {
+            font-size: 0.68rem; font-weight: 800; letter-spacing: 3px; color: var(--accent-1);
+            text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+        }
+        .section-label::before { content: ''; width: 30px; height: 2px; background: var(--accent-1); border-radius: 2px; }
+        .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; padding-top: 140px; }
+        .hero-tagline {
+            font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; color: var(--accent-3);
+            text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+        }
+        .hero-tagline-dot { width: 6px; height: 6px; background: var(--accent-3); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .hero h1 {
+            font-size: clamp(3rem,7vw,5.5rem); line-height: 0.9; margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-p) 60%, var(--accent-1));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        body[data-theme="executive"] .hero h1, body[data-theme="minimal"] .hero h1 { background: none; -webkit-text-fill-color: var(--text-p); }
+        .hero-subtitle { font-size: 0.95rem; color: var(--text-s); margin-bottom: 8px; font-weight: 500; }
+        .hero-location {
+            font-weight: 800; color: var(--accent-1); letter-spacing: 2px; font-size: 0.7rem;
+            margin-bottom: 30px; display: flex; align-items: center; gap: 6px;
+        }
         .hero-right { display: flex; flex-direction: column; gap: 30px; }
-        
-        .cta-group { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
+        .cta-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
         .btn {
-            padding: 12px 24px; border-radius: var(--radius); text-decoration: none;
-            font-weight: 700; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
-            cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 12px 22px; border-radius: var(--radius); text-decoration: none; font-weight: 700;
+            font-size: 0.72rem; display: inline-flex; align-items: center; gap: 8px;
+            transition: 0.3s cubic-bezier(0.16,1,0.3,1); cursor: pointer; text-transform: uppercase;
+            letter-spacing: 0.5px; border: none; font-family: var(--font-b);
         }
         .btn-p { background: var(--accent-1); color: white; border: 1px solid var(--accent-1); }
-        .btn-s { background: transparent; border: 1px solid var(--border); color: var(--text-p); }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-
-        /* =========================================
-           MAGICIAN HERO STYLES (NEON + 3D)
-        ========================================= */
+        .btn-linkedin { background: #0a66c2; color: white; border: 1px solid #0a66c2; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+        .btn-linkedin:hover { background: #004182; border-color: #004182; box-shadow: 0 12px 30px rgba(10,102,194,0.3); }
+        .btn-p:hover { box-shadow: 0 12px 30px rgba(99,102,241,0.35); }
+        .linkedin-icon { width: 14px; height: 14px; fill: white; flex-shrink: 0; }
         .neon-summary {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid var(--accent-1);
-            box-shadow: 0 0 15px var(--accent-1), inset 0 0 10px var(--accent-1);
-            color: var(--text-p);
-            font-size: 1.05rem;
-            line-height: 1.6;
-            text-align: justify;
-            transition: 0.5s ease;
+            background: rgba(99,102,241,0.05); padding: 25px 28px; border-radius: 16px;
+            border: 1px solid rgba(99,102,241,0.3);
+            box-shadow: 0 0 20px rgba(99,102,241,0.1), inset 0 0 20px rgba(99,102,241,0.03);
+            color: var(--text-p); font-size: 0.95rem; line-height: 1.75; text-align: justify;
+            transition: border-color 0.5s, box-shadow 0.5s;
+        }
+        body[data-theme="executive"] .neon-summary, body[data-theme="minimal"] .neon-summary {
+            border-color: var(--border); box-shadow: none; background: var(--surface-2);
         }
         .neon-summary strong { color: var(--accent-1); }
-
-        .card-3d-container {
-            perspective: 1000px;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        .card-3d-container { perspective: 1000px; width: 100%; max-width: 900px; margin: 0 auto; }
         .card-3d {
-            width: 100%;
-            background: linear-gradient(135deg, var(--surface), rgba(0,0,0,0.5));
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px;
-            transform-style: preserve-3d;
-            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.5s;
+            width: 100%; background: linear-gradient(135deg, var(--surface), rgba(0,0,0,0.5));
+            border: 1px solid var(--border); border-radius: 20px; padding: 30px;
+            transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1), border-color 0.5s;
             animation: float3d 6s ease-in-out infinite;
         }
         @keyframes float3d {
-            0% { transform: translateY(0px) rotateX(3deg) rotateY(-3deg); }
-            50% { transform: translateY(-12px) rotateX(-3deg) rotateY(3deg); }
+            0%   { transform: translateY(0px) rotateX(3deg) rotateY(-3deg); }
+            50%  { transform: translateY(-12px) rotateX(-3deg) rotateY(3deg); }
             100% { transform: translateY(0px) rotateX(3deg) rotateY(-3deg); }
         }
         .card-3d-container:hover .card-3d {
             animation-play-state: paused;
-            transform: rotateX(12deg) rotateY(-12deg) scale3d(1.05, 1.05, 1.05);
-            border-color: var(--accent-3);
-            box-shadow: -15px 15px 30px rgba(0,0,0,0.4);
+            transform: rotateX(12deg) rotateY(-12deg) scale3d(1.05,1.05,1.05);
+            border-color: var(--accent-3); box-shadow: -15px 15px 30px rgba(0,0,0,0.4);
         }
-        .card-3d-content {
-            transform: translateZ(60px);
-        }
+        .card-3d-content { transform: translateZ(60px); }
         .achieve-title {
-            font-family: var(--font-h);
-            color: var(--accent-3);
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-family: var(--font-h); color: var(--accent-3); font-size: 1rem;
+            margin-bottom: 20px; letter-spacing: 2px; display: flex; align-items: center; gap: 10px;
         }
         .achieve-title::before { content: '🏆'; }
-        
         .achieve-list { list-style: none; padding: 0; margin: 0; }
         .achieve-list li {
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            color: var(--text-p);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: rgba(255,255,255,0.02);
-            padding: 15px;
-            border-radius: 12px;
-            border-left: 3px solid var(--accent-1);
+            margin-bottom: 14px; font-size: 0.88rem; color: var(--text-p);
+            display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,0.02);
+            padding: 14px 18px; border-radius: 12px; border-left: 3px solid var(--accent-1); transition: background 0.3s;
         }
+        .achieve-list li:hover { background: rgba(255,255,255,0.05); }
         .achieve-list .highlight {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: var(--accent-1);
-            font-family: var(--font-h);
-            line-height: 1;
-            text-shadow: 0 0 10px rgba(var(--accent-1), 0.5);
-            min-width: 90px;
-            text-align: right;
-            flex-shrink: 0; /* Prevents the percentage from being squished by text */
+            font-size: 2.2rem; font-weight: 900; color: var(--accent-1); font-family: var(--font-h);
+            line-height: 1; min-width: 90px; text-align: right; flex-shrink: 0;
         }
         .achieve-list .desc { line-height: 1.4; }
-
-        /* =========================================
-           REST OF THE STYLES
-        ========================================= */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .card {
-            background: var(--surface); border: 1px solid var(--border);
-            padding: 30px; border-radius: var(--radius); transition: 0.4s;
+            background: var(--surface); border: 1px solid var(--border); padding: 28px 30px;
+            border-radius: var(--radius); transition: 0.4s cubic-bezier(0.16,1,0.3,1);
         }
-        .card:hover { border-color: var(--accent-1); transform: translateY(-5px); }
-
-        .tech-hub {
-            margin-bottom: 50px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;
-        }
+        .card:hover { border-color: var(--accent-1); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .tech-hub { margin-bottom: 50px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
         .tech-pill {
             background: var(--surface); border: 1px solid var(--border); padding: 10px 20px;
-            border-radius: 100px; font-weight: 800; font-size: 0.9rem; color: var(--accent-3);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 10px;
+            border-radius: 100px; font-weight: 800; font-size: 0.85rem; color: var(--accent-3);
+            transition: 0.3s cubic-bezier(0.175,0.885,0.32,1.275); display: flex; align-items: center; gap: 8px;
         }
         .tech-pill:hover {
             transform: scale(1.1) translateY(-5px); border-color: var(--accent-1);
-            background: rgba(99, 102, 241, 0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: rgba(99,102,241,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-        .tech-pill span { color: var(--text-p); font-size: 0.7rem; opacity: 0.6; }
-
-        .track { height: 6px; background: rgba(128,128,128,0.1); border-radius: 10px; margin-top: 15px; overflow: hidden; }
-        .fill { height: 100%; background: linear-gradient(90deg, var(--accent-1), var(--accent-3)); width: 0; transition: 2s; }
-
+        .tech-pill span { color: var(--text-s); font-size: 0.68rem; opacity: 0.7; font-weight: 500; }
+        .track { height: 5px; background: rgba(128,128,128,0.1); border-radius: 10px; margin-top: 15px; overflow: hidden; }
+        .fill { height: 100%; background: linear-gradient(90deg, var(--accent-1), var(--accent-3)); width: 0; transition: 2s cubic-bezier(0.16,1,0.3,1); border-radius: 10px; }
         .accordion-item {
             background: var(--surface); border: 1px solid var(--border); border-radius: 15px;
-            margin-bottom: 15px; overflow: hidden; transition: 0.4s;
+            margin-bottom: 14px; overflow: hidden; transition: 0.4s;
         }
         .accordion-header {
-            padding: 25px 30px; cursor: pointer; display: flex; justify-content: space-between;
-            align-items: center; user-select: none;
+            padding: 22px 28px; cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; user-select: none; transition: background 0.3s;
         }
-        .accordion-header h3 { font-size: 1.1rem; margin: 0; }
-        .accordion-header .company { color: var(--accent-1); font-weight: 800; font-size: 0.8rem; margin-left: 10px; }
-        .accordion-icon { font-size: 1.2rem; transition: 0.4s; color: var(--accent-1); }
+        .accordion-header:hover { background: var(--surface-2); }
+        .accordion-header h3 { font-size: 1.05rem; margin: 0; }
+        .accordion-header .company { color: var(--accent-1); font-weight: 800; font-size: 0.75rem; margin-top: 4px; display: block; }
+        .accordion-icon { font-size: 1rem; transition: 0.4s; color: var(--accent-1); flex-shrink: 0; }
         .accordion-content {
-            max-height: 0; overflow: hidden; transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
-            padding: 0 30px;
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4,0,0.2,1), padding 0.3s; padding: 0 28px;
         }
-        .accordion-item.active { border-color: var(--accent-1); }
-        .accordion-item.active .accordion-content { max-height: 500px; padding-bottom: 30px; }
+        .accordion-item.active { border-color: var(--accent-1); box-shadow: 0 0 0 1px var(--accent-1); }
+        .accordion-item.active .accordion-content { max-height: 500px; padding-bottom: 28px; }
         .accordion-item.active .accordion-icon { transform: rotate(180deg); }
-        
         .exp-detail-list { list-style: none; margin-top: 15px; }
-        .exp-detail-list li { font-size: 0.9rem; color: var(--text-s); margin-bottom: 10px; padding-left: 20px; position: relative; }
+        .exp-detail-list li { font-size: 0.87rem; color: var(--text-s); margin-bottom: 10px; padding-left: 20px; position: relative; line-height: 1.5; }
         .exp-detail-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent-1); }
-
-        .ripple-container { 
-            position: relative; width: 250px; height: 250px; margin: 0 auto; 
-            display: flex; align-items: center; justify-content: center; 
+        .ripple-container {
+            position: relative; width: 220px; height: 220px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: center;
         }
         .ripple { position: absolute; border: 2px solid var(--accent-1); border-radius: 50%; width: 100%; height: 100%; animation: rip 3s infinite; }
-        @keyframes rip { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
-
-        .dot { width: 8px; height: 8px; background: var(--cursor); position: fixed; border-radius: 50%; pointer-events: none; z-index: 10001; }
-        .ring { width: 35px; height: 35px; border: 1px solid var(--cursor); position: fixed; border-radius: 50%; pointer-events: none; z-index: 10001; transition: 0.1s ease-out; }
-
-        .marquee { 
-            width: 100%; overflow: hidden; padding: 30px 0; background: var(--surface); 
-            margin: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+        @keyframes rip { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(3); opacity: 0; } }
+        .contact-link {
+            background: var(--surface); border: 1px solid var(--border); padding: 20px 24px;
+            border-radius: var(--radius); display: flex; align-items: center; gap: 18px;
+            margin-bottom: 14px; text-decoration: none; color: var(--text-p); transition: 0.3s;
         }
-        .m-content { 
-            display: flex; width: max-content; gap: 100px; white-space: nowrap; 
-            animation: scroll-marquee 30s linear infinite; 
+        .contact-link:hover { border-color: var(--accent-1); transform: translateX(6px); background: var(--surface-2); }
+        .contact-icon {
+            width: 44px; height: 44px; border-radius: 50%; background: rgba(99,102,241,0.1);
+            display: flex; align-items: center; justify-content: center; color: var(--accent-1); font-size: 1.1rem; flex-shrink: 0;
         }
-        .m-item { font-size: 1.5rem; font-weight: 800; color: var(--text-s); opacity: 0.3; flex-shrink: 0; font-family: var(--font-h); }
+        .contact-icon.li-icon { background: rgba(10,102,194,0.15); color: #0a66c2; }
+        .contact-label { font-size: 0.65rem; color: var(--accent-1); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+        .contact-value { font-size: 0.9rem; font-weight: 500; }
+        .dot { width: 8px; height: 8px; background: var(--cursor); position: fixed; border-radius: 50%; pointer-events: none; z-index: 10001; transform: translate(-50%,-50%); }
+        .ring { width: 35px; height: 35px; border: 1px solid var(--cursor); position: fixed; border-radius: 50%; pointer-events: none; z-index: 10001; transition: 0.1s ease-out; transform: translate(-50%,-50%); opacity: 0.5; }
+        .marquee {
+            width: 100%; overflow: hidden; padding: 28px 0; background: var(--surface);
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+        }
+        .m-content { display: flex; width: max-content; gap: 80px; white-space: nowrap; animation: scroll-marquee 30s linear infinite; }
+        .m-item { font-size: 1.3rem; font-weight: 800; color: var(--text-s); opacity: 0.25; flex-shrink: 0; font-family: var(--font-h); letter-spacing: 2px; }
         @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* Dynamic Mobile Layout & Text Alignments */
+        #back-to-top {
+            position: fixed; bottom: 32px; right: 32px; z-index: 999;
+            width: 46px; height: 46px; border-radius: 50%; background: var(--accent-1);
+            color: white; border: none; cursor: pointer; font-size: 1.1rem;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 24px rgba(99,102,241,0.4); opacity: 0;
+            transform: translateY(20px) scale(0.9); transition: 0.3s cubic-bezier(0.16,1,0.3,1); pointer-events: none;
+        }
+        #back-to-top.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        #back-to-top:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 14px 30px rgba(99,102,241,0.5); }
+        footer {
+            padding: 40px 10%; background: var(--surface); border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+        }
+        .footer-logo { font-family: var(--font-h); font-weight: 800; color: var(--accent-1); font-size: 1rem; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a {
+            color: var(--text-s); font-size: 0.75rem; text-decoration: none;
+            font-weight: 700; letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--accent-1); }
+        .footer-copy { color: var(--text-s); font-size: 0.72rem; }
         @media (max-width: 968px) {
             nav { padding: 1rem 5%; }
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .cta-group { justify-content: center; margin-top: 10px; margin-bottom: 40px; }
-            
-            /* Ensures neon summary isn't awkwardly justified with large gaps on phones */
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 30px; padding-top: 120px; }
+            .hero-tagline, .hero-location { justify-content: center; }
+            .cta-group { justify-content: center; margin-top: 10px; margin-bottom: 20px; }
             .neon-summary { text-align: left; }
-            
             .menu-toggle { display: flex; }
             .nav-links {
                 position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
                 background-color: var(--bg); flex-direction: column; justify-content: center;
-                gap: 30px; padding: 40px; transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1050;
+                gap: 24px; padding: 40px; transition: 0.4s cubic-bezier(0.77,0,0.175,1); z-index: 1050;
             }
-            .nav-links.active { right: 0; } 
+            .nav-links.active { right: 0; }
             .nav-links li { width: 100%; text-align: center; }
-            .nav-links a { font-size: 1.5rem; letter-spacing: 4px; display: block; padding: 15px; border-radius: 12px; transition: 0.3s ease; }
-            .nav-links a:hover, .nav-links a:active { color: var(--accent-1); background: var(--surface); text-shadow: 0 0 15px var(--accent-1); transform: scale(1.05); }
-            
+            .nav-links a { font-size: 1.4rem; letter-spacing: 4px; display: block; padding: 12px; border-radius: 12px; }
+            .nav-links a::after { display: none; }
+            .nav-links a:hover, .nav-links a:active { color: var(--accent-1); background: var(--surface); }
             .theme-selector { margin-top: 20px; }
             .theme-selector:hover .theme-menu { position: static; display: flex; background: transparent; border: none; box-shadow: none; margin-top: 10px; }
-            .theme-menu button { text-align: center; font-size: 1rem; padding: 15px; }
-            
+            .theme-menu button { text-align: center; font-size: 1rem; padding: 14px; }
             .accordion-header h3 { font-size: 0.95rem; }
             .accordion-header { flex-direction: column; align-items: flex-start; gap: 5px; }
-
-            /* Fix for Overlapping Text in Key Achievements on Mobile */
-            .achieve-list li {
-                flex-direction: column;
-                text-align: center;
-                justify-content: center;
-                gap: 10px;
-            }
-            .achieve-list .highlight {
-                text-align: center;
-            }
+            .achieve-list li { flex-direction: column; text-align: center; justify-content: center; gap: 8px; }
+            .achieve-list .highlight { text-align: center; min-width: unset; }
+            footer { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
+            #back-to-top { bottom: 20px; right: 20px; }
+            #particle-canvas { display: none; }
         }
     </style>
 </head>
 <body data-theme="cyber">
 
+    <div id="progress-bar"></div>
     <div class="dot"></div>
     <div class="ring"></div>
     <canvas id="particle-canvas"></canvas>
+    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
     <nav>
-        <div class="syne" style="font-weight: 800; color: var(--accent-1); font-size: 1.2rem;">HANI.ALSAKANI</div>
-        <button class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+        <a href="#about" class="nav-logo">HANI.ALSAKANI</a>
+        <button class="menu-toggle" id="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
         </button>
-
         <ul class="nav-links" id="nav-links">
-            <li><a href="#about" onclick="toggleMenu()">About</a></li>
-            <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
-            <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-            <li><a href="#certifications" onclick="toggleMenu()">Certifications</a></li>
-            <li><a href="#education" onclick="toggleMenu()">Education</a></li>
-            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+            <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+            <li><a href="#certifications" onclick="closeMenu()">Certifications</a></li>
+            <li><a href="#education" onclick="closeMenu()">Education</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
             <li class="theme-selector">
                 <button class="theme-btn">🎨 THEMES</button>
                 <div class="theme-menu">
-                    <button onclick="setTheme('cyber'); toggleMenu();">🌌 Cyber-Glow Analytics</button>
-                    <button onclick="setTheme('executive'); toggleMenu();">🏛️ The Executive Consultant</button>
-                    <button onclick="setTheme('bento'); toggleMenu();">🍱 The Bento Dashboard</button>
-                    <button onclick="setTheme('minimal'); toggleMenu();">🎯 The Pure Impact</button>
+                    <button onclick="setTheme('cyber'); closeMenu();">🌌 Cyber-Glow Analytics</button>
+                    <button onclick="setTheme('executive'); closeMenu();">🏛️ The Executive Consultant</button>
+                    <button onclick="setTheme('bento'); closeMenu();">🍱 The Bento Dashboard</button>
+                    <button onclick="setTheme('minimal'); closeMenu();">🎯 The Pure Impact</button>
                 </div>
             </li>
         </ul>
@@ -397,42 +347,44 @@
 
     <section id="about" class="hero">
         <div class="reveal hero-left">
-            <div style="font-weight: 800; color: var(--accent-1); letter-spacing: 2px; margin-bottom: 10px; font-size: 0.7rem;">GREATER LONDON, UK</div>
+            <div class="hero-tagline">
+                <span class="hero-tagline-dot"></span>
+                IT Business Analyst &amp; Data Strategist
+            </div>
             <h1>Hani Alsakani</h1>
-            
+            <p class="hero-subtitle">Turning raw data into decisions that move organisations forward.</p>
+            <div class="hero-location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity:0.7"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                Greater London, UK
+            </div>
             <div class="cta-group">
-                <a href="hani-alsakani-cv.pdf" download class="btn btn-p">Download CV (PDF)</a>
+                <a href="hani-alsakani-cv.pdf" download class="btn btn-p">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download CV
+                </a>
+                <a href="https://www.linkedin.com/in/hani-alsakani" target="_blank" rel="noopener noreferrer" class="btn btn-linkedin">
+                    <svg class="linkedin-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    LinkedIn
+                </a>
             </div>
         </div>
-        
         <div class="reveal hero-right">
-            <!-- 1. Neon Glowing Summary -->
             <div class="neon-summary">
-                Results-driven IT Business Analyst with a proven track record in developing intuitive <strong>Tableau</strong> and <strong>Looker</strong> dashboards, comprehensive data analysis, and end-to-end process optimization. Adept at bridging the gap between technical teams and executive stakeholders, I specialize in streamlining complex workflows, ensuring data compliance, and translating raw metrics into actionable, strategic insights.
+                Results-driven IT Business Analyst with a proven track record in developing intuitive <strong>Tableau</strong> and <strong>Looker</strong> dashboards, comprehensive data analysis, and end-to-end process optimisation. Adept at bridging the gap between technical teams and executive stakeholders, I specialise in streamlining complex workflows, ensuring data compliance, and translating raw metrics into actionable, strategic insights.
             </div>
         </div>
     </section>
 
-    <!-- 2. Animated 3D Key Achievements Card Moved to its own section -->
-    <section id="achievements" style="padding-top: 0; padding-bottom: 80px;">
+    <section id="achievements" style="padding-top:0;padding-bottom:80px;min-height:unset;">
         <div class="reveal">
             <div class="card-3d-container">
                 <div class="card-3d">
                     <div class="card-3d-content">
                         <div class="achieve-title">KEY ACHIEVEMENTS</div>
                         <ul class="achieve-list">
-                            <li>
-                                <span class="highlight">30%</span>
-                                <span class="desc">Efficiency increase in decision-making via dashboards</span>
-                            </li>
-                            <li>
-                                <span class="highlight">20%</span>
-                                <span class="desc">Reduction in approval times through SAP/Jira workflows</span>
-                            </li>
-                            <li>
-                                <span class="highlight">16K+</span>
-                                <span class="desc">Supported participants in leadership and skill-building initiatives through data-driven reporting</span>
-                            </li>
+                            <li><span class="highlight">30%</span><span class="desc">Efficiency increase in decision-making via executive dashboards</span></li>
+                            <li><span class="highlight">20%</span><span class="desc">Reduction in approval times through SAP/Jira workflow optimisation</span></li>
+                            <li><span class="highlight">16K+</span><span class="desc">Participants supported in leadership &amp; skill-building initiatives through data-driven reporting</span></li>
                         </ul>
                     </div>
                 </div>
@@ -440,10 +392,10 @@
         </div>
     </section>
 
-    <!-- REDESIGNED TECHNICAL EXPERTISE SECTION -->
     <section id="skills">
-        <h2 class="reveal" style="margin-bottom: 20px;">Visualisation and Data-driven Strategy</h2>
-        
+        <div class="section-label reveal">Technical Expertise</div>
+        <h2 class="reveal" style="margin-bottom:10px;">Visualisation &amp; Data Strategy</h2>
+        <p class="reveal" style="color:var(--text-s);font-size:0.9rem;margin-bottom:40px;max-width:600px;">Tools and platforms I use to translate complex datasets into clear, strategic narratives.</p>
         <div class="tech-hub reveal">
             <div class="tech-pill">Tableau <span>Expert</span></div>
             <div class="tech-pill">Looker <span>Expert</span></div>
@@ -451,44 +403,43 @@
             <div class="tech-pill">Excel <span>Expert</span></div>
             <div class="tech-pill">SQL <span>Foundational</span></div>
             <div class="tech-pill">Python <span>Foundational</span></div>
+            <div class="tech-pill">SAP <span>Proficient</span></div>
+            <div class="tech-pill">Jira <span>Proficient</span></div>
             <div class="tech-pill">GitHub <span>Foundational</span></div>
         </div>
-
         <div class="grid">
             <div class="card reveal">
-                <div style="font-size: 0.7rem; font-weight: 800; color: var(--accent-1); margin-bottom: 10px;">ANALYTICS HUB</div>
+                <div style="font-size:0.68rem;font-weight:800;color:var(--accent-1);margin-bottom:10px;letter-spacing:1px;">ANALYTICS HUB</div>
                 <h3>Business Intelligence Architecture</h3>
                 <div class="track"><div class="fill" data-w="95"></div></div>
-                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-s);">Deploying executive-level dashboards that translated complex data into clear strategies for ISDB stakeholders.</p>
+                <p style="margin-top:15px;font-size:0.85rem;color:var(--text-s);">Deploying executive-level dashboards that translated complex data into clear strategies for ISDB stakeholders.</p>
             </div>
             <div class="card reveal">
-                <div style="font-size: 0.7rem; font-weight: 800; color: var(--accent-1); margin-bottom: 10px;">OPERATIONS HUB</div>
-                <h3>Process Optimisation & Documentation</h3>
+                <div style="font-size:0.68rem;font-weight:800;color:var(--accent-1);margin-bottom:10px;letter-spacing:1px;">OPERATIONS HUB</div>
+                <h3>Process Optimisation &amp; Documentation</h3>
                 <div class="track"><div class="fill" data-w="90"></div></div>
-                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-s);">Expert in SAP/Jira integration workflows, reducing approval cycles by 20% through automated reporting.</p>
+                <p style="margin-top:15px;font-size:0.85rem;color:var(--text-s);">Expert in SAP/Jira integration workflows, reducing approval cycles by 20% through automated reporting.</p>
             </div>
             <div class="card reveal">
-                <div style="font-size: 0.7rem; font-weight: 800; color: var(--accent-1); margin-bottom: 10px;">COMPLIANCE HUB</div>
-                <h3>Compliance & Strategy</h3>
+                <div style="font-size:0.68rem;font-weight:800;color:var(--accent-1);margin-bottom:10px;letter-spacing:1px;">COMPLIANCE HUB</div>
+                <h3>Compliance &amp; Strategy</h3>
                 <div class="track"><div class="fill" data-w="85"></div></div>
-                <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-s);">Deep understanding of GDPR principles and data usage documentation within large scale initiatives.</p>
+                <p style="margin-top:15px;font-size:0.85rem;color:var(--text-s);">Deep understanding of GDPR principles and data usage documentation within large-scale initiatives.</p>
             </div>
         </div>
     </section>
 
     <section id="experience">
-        <h2 class="reveal" style="margin-bottom: 40px;">Professional History</h2>
+        <div class="section-label reveal">Career History</div>
+        <h2 class="reveal" style="margin-bottom:40px;">Professional Experience</h2>
         <div class="reveal">
             <div class="accordion-item">
                 <div class="accordion-header" onclick="this.parentElement.classList.toggle('active')">
-                    <div>
-                        <h3>Technical & Administrative Assistant</h3>
-                        <span class="company">The Kingdom of Saudi Arabia Project for Utilization of Hady & Adahi – ISDB</span>
-                    </div>
+                    <div><h3>Technical &amp; Administrative Assistant</h3><span class="company">Kingdom of Saudi Arabia Project for Hady &amp; Adahi – ISDB</span></div>
                     <div class="accordion-icon">▼</div>
                 </div>
                 <div class="accordion-content">
-                    <span style="font-size: 0.75rem; color: var(--accent-1); font-weight: 800;">Jeddah, Saudi Arabia | May 2022 – Nov 2024</span>
+                    <span style="font-size:0.75rem;color:var(--accent-1);font-weight:800;">Jeddah, Saudi Arabia | May 2022 – Nov 2024</span>
                     <ul class="exp-detail-list">
                         <li>Managed project documentation using SAP and Jira; coordinated with contractors and engineers.</li>
                         <li>Oversaw operational logistics for weekly slaughter processes and beneficiary country collaborations.</li>
@@ -497,35 +448,27 @@
                     </ul>
                 </div>
             </div>
-
             <div class="accordion-item">
                 <div class="accordion-header" onclick="this.parentElement.classList.toggle('active')">
-                    <div>
-                        <h3>IT Business Analyst & Technical Support (Volunteer)</h3>
-                        <span class="company">Altanmiah Alejabiah Association (Non-Profit)</span>
-                    </div>
+                    <div><h3>IT Business Analyst &amp; Technical Support</h3><span class="company">Altanmiah Alejabiah Association (Non-Profit) — Volunteer</span></div>
                     <div class="accordion-icon">▼</div>
                 </div>
                 <div class="accordion-content">
-                    <span style="font-size: 0.75rem; color: var(--accent-1); font-weight: 800;">Jeddah, Saudi Arabia | May 2022 – Nov 2024</span>
+                    <span style="font-size:0.75rem;color:var(--accent-1);font-weight:800;">Jeddah, Saudi Arabia | May 2022 – Nov 2024</span>
                     <ul class="exp-detail-list">
-                        <li>Analysed business procedures and assessed workflows to align with organizational goals.</li>
+                        <li>Analysed business procedures and assessed workflows to align with organisational goals.</li>
                         <li>Designed interactive reports and dashboards to support data-driven strategies.</li>
                         <li>Provided technical support and proposed system improvements to enhance efficiency.</li>
                     </ul>
                 </div>
             </div>
-
             <div class="accordion-item">
                 <div class="accordion-header" onclick="this.parentElement.classList.toggle('active')">
-                    <div>
-                        <h3>IT Business Analyst & Technical Support (Volunteer)</h3>
-                        <span class="company">Sawaeid Center (Non-Profit)</span>
-                    </div>
+                    <div><h3>IT Business Analyst &amp; Technical Support</h3><span class="company">Sawaeid Center (Non-Profit) — Volunteer</span></div>
                     <div class="accordion-icon">▼</div>
                 </div>
                 <div class="accordion-content">
-                    <span style="font-size: 0.75rem; color: var(--accent-1); font-weight: 800;">Jeddah, Saudi Arabia | Jan 2021 – Feb 2022</span>
+                    <span style="font-size:0.75rem;color:var(--accent-1);font-weight:800;">Jeddah, Saudi Arabia | Jan 2021 – Feb 2022</span>
                     <ul class="exp-detail-list">
                         <li>Documented and analysed work procedures, identifying areas for improvement.</li>
                         <li>Conducted stakeholder interviews to evaluate system effectiveness and recommended updates.</li>
@@ -533,17 +476,13 @@
                     </ul>
                 </div>
             </div>
-
             <div class="accordion-item">
                 <div class="accordion-header" onclick="this.parentElement.classList.toggle('active')">
-                    <div>
-                        <h3>Project Management Coordinator</h3>
-                        <span class="company">Modernization & Development of Slaughterhouses Project – ISDB</span>
-                    </div>
+                    <div><h3>Project Management Coordinator</h3><span class="company">Modernisation &amp; Development of Slaughterhouses – ISDB</span></div>
                     <div class="accordion-icon">▼</div>
                 </div>
                 <div class="accordion-content">
-                    <span style="font-size: 0.75rem; color: var(--accent-1); font-weight: 800;">Jeddah, Saudi Arabia | Jul 2019 – Sep 2020</span>
+                    <span style="font-size:0.75rem;color:var(--accent-1);font-weight:800;">Jeddah, Saudi Arabia | Jul 2019 – Sep 2020</span>
                     <ul class="exp-detail-list">
                         <li>Managed project timelines, budgets, and deliverables to ensure successful execution.</li>
                         <li>Communicated with consulting firms to define project requirements and scope.</li>
@@ -555,90 +494,58 @@
     </section>
 
     <section id="certifications">
-        <h2 class="reveal" style="margin-bottom: 40px;">Licenses & Certifications</h2>
+        <div class="section-label reveal">Credentials</div>
+        <h2 class="reveal" style="margin-bottom:40px;">Licenses &amp; Certifications</h2>
         <div class="grid">
-            <div class="card reveal">
-                <div style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem; margin-bottom: 5px;">IIBA</div>
-                <h3 style="font-size: 1rem;">ECBA – Entry Certificate in Business Analysis</h3>
-                <p style="font-size: 0.8rem; color: var(--text-s); margin-top: 10px;">International Institute of Business Analysis</p>
-            </div>
-            <div class="card reveal">
-                <div style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem; margin-bottom: 5px;">Digital Initiative</div>
-                <h3 style="font-size: 1rem;">Data Analysis & Full Stack Tracks</h3>
-                <p style="font-size: 0.8rem; color: var(--text-s); margin-top: 10px;">1 Million Arab Coders Initiative</p>
-            </div>
-            <div class="card reveal">
-                <div style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem; margin-bottom: 5px;">PMI Standard</div>
-                <h3 style="font-size: 1rem;">PMP Certificate of Training</h3>
-                <p style="font-size: 0.8rem; color: var(--text-s); margin-top: 10px;">Project Management Professional Training</p>
-            </div>
-            <div class="card reveal">
-                <div style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem; margin-bottom: 5px;">Web Tech</div>
-                <h3 style="font-size: 1rem;">Programming & Web Dev (PHP)</h3>
-                <p style="font-size: 0.8rem; color: var(--text-s); margin-top: 10px;">Advanced Web Development Foundations</p>
-            </div>
-            <div class="card reveal">
-                <div style="color: var(--accent-1); font-weight: 800; font-size: 0.75rem; margin-bottom: 5px;">Visualization</div>
-                <h3 style="font-size: 1rem;">Data Visualisation Workshops</h3>
-                <p style="font-size: 0.8rem; color: var(--text-s); margin-top: 10px;">Infographic Design & PowerPoint Slide Zoom</p>
-            </div>
+            <div class="card reveal"><div style="color:var(--accent-1);font-weight:800;font-size:0.72rem;margin-bottom:8px;letter-spacing:1px;">IIBA</div><h3 style="font-size:0.95rem;">ECBA – Entry Certificate in Business Analysis</h3><p style="font-size:0.8rem;color:var(--text-s);margin-top:10px;">International Institute of Business Analysis</p></div>
+            <div class="card reveal"><div style="color:var(--accent-1);font-weight:800;font-size:0.72rem;margin-bottom:8px;letter-spacing:1px;">Digital Initiative</div><h3 style="font-size:0.95rem;">Data Analysis &amp; Full Stack Tracks</h3><p style="font-size:0.8rem;color:var(--text-s);margin-top:10px;">1 Million Arab Coders Initiative</p></div>
+            <div class="card reveal"><div style="color:var(--accent-1);font-weight:800;font-size:0.72rem;margin-bottom:8px;letter-spacing:1px;">PMI Standard</div><h3 style="font-size:0.95rem;">PMP Certificate of Training</h3><p style="font-size:0.8rem;color:var(--text-s);margin-top:10px;">Project Management Professional Training</p></div>
+            <div class="card reveal"><div style="color:var(--accent-1);font-weight:800;font-size:0.72rem;margin-bottom:8px;letter-spacing:1px;">Web Tech</div><h3 style="font-size:0.95rem;">Programming &amp; Web Development (PHP)</h3><p style="font-size:0.8rem;color:var(--text-s);margin-top:10px;">Advanced Web Development Foundations</p></div>
+            <div class="card reveal"><div style="color:var(--accent-1);font-weight:800;font-size:0.72rem;margin-bottom:8px;letter-spacing:1px;">Visualisation</div><h3 style="font-size:0.95rem;">Data Visualisation Workshops</h3><p style="font-size:0.8rem;color:var(--text-s);margin-top:10px;">Infographic Design &amp; PowerPoint Slide Zoom</p></div>
         </div>
     </section>
 
     <section id="education">
-        <h2 class="reveal" style="margin-bottom: 40px;">Education</h2>
+        <div class="section-label reveal">Academic Background</div>
+        <h2 class="reveal" style="margin-bottom:40px;">Education</h2>
         <div class="grid">
-            <div class="card reveal">
-                <span style="color: var(--accent-1); font-weight: 800;">Sept 2025 – Sept 2026 (Expected)</span>
-                <h3>MSc Business Analytics</h3>
-                <p style="font-size: 0.9rem;">Kingston University, London, UK</p>
-            </div>
-            <div class="card reveal">
-                <span style="color: var(--accent-1); font-weight: 800;">BSc (Honors)</span>
-                <h3>IT & Computing</h3>
-                <p style="font-size: 0.9rem;">The Open University, UK</p>
-            </div>
-            <div class="card reveal">
-                <span style="color: var(--accent-1); font-weight: 800;">Diploma</span>
-                <h3>Level 2 Digital & IT Skills</h3>
-                <p style="font-size: 0.9rem;">Just IT Training, England, UK</p>
-            </div>
+            <div class="card reveal"><span style="color:var(--accent-1);font-weight:800;font-size:0.8rem;">Sept 2025 – Sept 2026 (Expected)</span><h3 style="margin-top:10px;">MSc Business Analytics</h3><p style="font-size:0.9rem;color:var(--text-s);margin-top:6px;">Kingston University, London, UK</p></div>
+            <div class="card reveal"><span style="color:var(--accent-1);font-weight:800;font-size:0.8rem;">BSc (Hons)</span><h3 style="margin-top:10px;">IT &amp; Computing</h3><p style="font-size:0.9rem;color:var(--text-s);margin-top:6px;">The Open University, UK</p></div>
+            <div class="card reveal"><span style="color:var(--accent-1);font-weight:800;font-size:0.8rem;">Diploma</span><h3 style="margin-top:10px;">Level 2 Digital &amp; IT Skills</h3><p style="font-size:0.9rem;color:var(--text-s);margin-top:6px;">Just IT Training, England, UK</p></div>
         </div>
-        <div class="reveal" style="margin-top: 30px; display: flex; flex-wrap: wrap; gap: 20px;">
-            <div style="background: var(--surface); padding: 15px 25px; border-radius: var(--radius); border: 1px solid var(--border);">
-                <strong>Arabic</strong> <span style="color: var(--text-s); font-size: 0.8rem;">Native</span>
-            </div>
-            <div style="background: var(--surface); padding: 15px 25px; border-radius: var(--radius); border: 1px solid var(--border);">
-                <strong>English</strong> <span style="color: var(--text-s); font-size: 0.8rem;">Fluent / Professional</span>
-            </div>
+        <div class="reveal" style="margin-top:30px;display:flex;flex-wrap:wrap;gap:16px;">
+            <div style="background:var(--surface);padding:14px 24px;border-radius:var(--radius);border:1px solid var(--border);"><strong>Arabic</strong> <span style="color:var(--text-s);font-size:0.8rem;margin-left:6px;">Native</span></div>
+            <div style="background:var(--surface);padding:14px 24px;border-radius:var(--radius);border:1px solid var(--border);"><strong>English</strong> <span style="color:var(--text-s);font-size:0.8rem;margin-left:6px;">Fluent / Professional</span></div>
         </div>
     </section>
 
     <section id="contact">
-        <h2 class="reveal" style="text-align: center; margin-bottom: 50px;">Let's Collaborate</h2>
-        <div class="grid" style="align-items: center;">
+        <div class="section-label reveal" style="justify-content:center;">Get In Touch</div>
+        <h2 class="reveal" style="text-align:center;margin-bottom:12px;">Let's Collaborate</h2>
+        <p class="reveal" style="text-align:center;color:var(--text-s);font-size:0.9rem;margin-bottom:50px;max-width:480px;margin-left:auto;margin-right:auto;">Open to new opportunities, consulting work, and strategic partnerships. Reach out and let's talk.</p>
+        <div class="grid" style="align-items:center;max-width:900px;margin:0 auto;">
             <div class="reveal">
-                <div class="card" style="margin-bottom: 15px; display: flex; align-items: center; gap: 20px;">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center; color: var(--accent-1);">@</div>
-                    <div>
-                        <div style="font-size: 0.7rem; color: var(--accent-1); font-weight: 800;">EMAIL</div>
-                        <div>hanialsakani@gmail.com</div>
+                <a href="mailto:hanialsakani@gmail.com" class="contact-link">
+                    <div class="contact-icon">@</div>
+                    <div><div class="contact-label">Email</div><div class="contact-value">hanialsakani@gmail.com</div></div>
+                </a>
+                <a href="tel:07477360962" class="contact-link">
+                    <div class="contact-icon">📞</div>
+                    <div><div class="contact-label">Phone</div><div class="contact-value">07477 360 962</div></div>
+                </a>
+                <a href="https://www.linkedin.com/in/hani-alsakani" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <div class="contact-icon li-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                     </div>
-                </div>
-                <div class="card" style="margin-bottom: 15px; display: flex; align-items: center; gap: 20px;">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center; color: var(--accent-1);">📞</div>
-                    <div>
-                        <div style="font-size: 0.7rem; color: var(--accent-1); font-weight: 800;">PHONE</div>
-                        <div>07477360962</div>
-                    </div>
-                </div>
+                    <div><div class="contact-label">LinkedIn</div><div class="contact-value">linkedin.com/in/hani-alsakani</div></div>
+                </a>
             </div>
-            <div class="reveal">
+            <div class="reveal" style="display:flex;justify-content:center;">
                 <div class="ripple-container">
                     <div class="ripple"></div>
-                    <div class="ripple" style="animation-delay: 1s;"></div>
-                    <div class="ripple" style="animation-delay: 2s;"></div>
-                    <img src="personal_picture.png" alt="Hani Alsakani" style="z-index: 2; width: 100%; height: 100%; border-radius: 50%; object-fit: contain; border: 3px solid var(--accent-1);">
+                    <div class="ripple" style="animation-delay:1s;"></div>
+                    <div class="ripple" style="animation-delay:2s;"></div>
+                    <img src="personal_picture.png" alt="Hani Alsakani" style="z-index:2;width:100%;height:100%;border-radius:50%;object-fit:contain;border:3px solid var(--accent-1);">
                 </div>
             </div>
         </div>
@@ -646,17 +553,25 @@
 
     <div class="marquee">
         <div class="m-content">
-            <div class="m-item">TABLEAU</div>
-            <div class="m-item">LOOKER</div>
-            <div class="m-item">ISDB</div>
-            <div class="m-item">KINGSTON UNIVERSITY</div>
-            <div class="m-item">ALTANMIAH ALEJABIAH</div>
-            <div class="m-item">SAWAEID CENTER</div>
-            <div class="m-item">OPEN UNIVERSITY</div>
-            <div class="m-item">TABLEAU</div>
-            <div class="m-item">LOOKER</div>
+            <div class="m-item">TABLEAU</div><div class="m-item">LOOKER</div><div class="m-item">ISDB</div>
+            <div class="m-item">KINGSTON UNIVERSITY</div><div class="m-item">ALTANMIAH ALEJABIAH</div>
+            <div class="m-item">SAWAEID CENTER</div><div class="m-item">OPEN UNIVERSITY</div>
+            <div class="m-item">POWER BI</div><div class="m-item">SAP · JIRA</div>
+            <div class="m-item">TABLEAU</div><div class="m-item">LOOKER</div><div class="m-item">KINGSTON UNIVERSITY</div>
         </div>
     </div>
+
+    <footer>
+        <div class="footer-logo">HANI.ALSAKANI</div>
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+            <a href="https://www.linkedin.com/in/hani-alsakani" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </nav>
+        <div class="footer-copy">&copy; 2026 Hani Alsakani. All rights reserved.</div>
+    </footer>
 
     <script>
         function toggleMenu() {
@@ -668,41 +583,59 @@
                 document.body.style.overflow = links.classList.contains('active') ? 'hidden' : 'auto';
             }
         }
-
+        function closeMenu() {
+            const links = document.getElementById('nav-links');
+            const toggle = document.getElementById('menu-toggle');
+            links.classList.remove('active');
+            toggle.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
         function setTheme(theme) {
             document.body.setAttribute('data-theme', theme);
             const canvas = document.getElementById('particle-canvas');
-            if(canvas) canvas.style.opacity = (theme === 'cyber') ? '1' : '0';
+            if (canvas) canvas.style.opacity = (theme === 'cyber') ? '1' : '0';
             triggerSkills();
         }
-
+        const progressBar = document.getElementById('progress-bar');
+        const btt = document.getElementById('back-to-top');
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 120) current = sec.id; });
+            navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+        }
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            progressBar.style.width = (scrollTop / scrollHeight * 100) + '%';
+            btt.classList.toggle('visible', window.scrollY > 400);
+            updateActiveNav();
+        }, { passive: true });
         const dot = document.querySelector('.dot');
         const ring = document.querySelector('.ring');
         document.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-            setTimeout(() => { ring.style.left = e.clientX - 17 + 'px'; ring.style.top = e.clientY - 17 + 'px'; }, 60);
+            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+            setTimeout(() => { ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }, 60);
         });
-
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
         function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         class Particle {
-            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2; this.vx = Math.random() * 0.4 - 0.2; this.vy = Math.random() * 0.4 - 0.2; }
-            update() { this.x += this.vx; this.y += this.vy; if (this.x > canvas.width || this.x < 0) this.vx *= -1; if (this.y > canvas.height || this.y < 0) this.vy *= -1; }
-            draw() { ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-1'); ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+            constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.size = Math.random()*1.5+0.5; this.vx = Math.random()*0.4-0.2; this.vy = Math.random()*0.4-0.2; }
+            update() { this.x+=this.vx; this.y+=this.vy; if(this.x>canvas.width||this.x<0)this.vx*=-1; if(this.y>canvas.height||this.y<0)this.vy*=-1; }
+            draw() { ctx.fillStyle=getComputedStyle(document.body).getPropertyValue('--accent-1').trim(); ctx.globalAlpha=0.5; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); ctx.globalAlpha=1; }
         }
-        function createParticles() { particles = []; for (let i = 0; i < 60; i++) particles.push(new Particle()); }
-        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        function createParticles() { particles=[]; for(let i=0;i<60;i++) particles.push(new Particle()); }
+        function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(animate); }
         window.addEventListener('resize', initCanvas);
         initCanvas(); createParticles(); animate();
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    if (entry.target.id === 'skills' || entry.target.closest('#skills')) triggerSkills();
+                    if (entry.target.closest('#skills')) triggerSkills();
                 }
             });
         }, { threshold: 0.1 });
